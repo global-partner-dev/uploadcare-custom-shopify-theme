@@ -420,14 +420,12 @@
 .modal-content {
   position: relative;
   background: white;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 1200px;
-  height: 80%;
-  max-height: 800px;
+  border-radius: 0;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
   overflow: hidden;
 }
 
@@ -660,11 +658,6 @@
 
 /* Mobile Responsive for Modal */
 @media screen and (max-width: 768px) {
-  .modal-content {
-    width: 95%;
-    height: 90%;
-  }
-  
   .modal-layout {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr auto;
@@ -698,12 +691,6 @@
 }
 
 @media screen and (max-width: 480px) {
-  .modal-content {
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-  }
-  
   .upload-area {
     padding: 1rem;
   }
