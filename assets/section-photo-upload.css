@@ -34,6 +34,41 @@
   align-items: start;
 }
 
+/* Select Pictures Button Styling */
+.select-pictures-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.select-pictures-btn {
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+  min-width: 200px;
+}
+
+.select-pictures-btn:hover {
+  background: #ff3742;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+}
+
+.select-pictures-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+}
+
 /* UploadCare Widget Styling */
 .uploadcare-widget-container {
   background: #fff;
@@ -357,4 +392,323 @@
 
 .photo-slot.error .photo-placeholder {
   color: #ff4757;
+}
+
+/* Modal Styles */
+.photo-selection-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 1200px;
+  height: 80%;
+  max-height: 800px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0.5rem;
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: #333;
+}
+
+.modal-body {
+  flex: 1;
+  overflow: hidden;
+}
+
+.modal-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr 300px;
+  height: 100%;
+}
+
+/* File Sources Sidebar */
+.file-sources-sidebar {
+  background: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  padding: 1rem 0;
+}
+
+.source-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.source-option:hover {
+  background: #e9ecef;
+}
+
+.source-option.active {
+  background: #e3f2fd;
+  border-left-color: #2196f3;
+  color: #1976d2;
+}
+
+.source-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+}
+
+.source-option span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Upload Area */
+.upload-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: white;
+}
+
+.upload-content {
+  text-align: center;
+  width: 100%;
+}
+
+.upload-title {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #666;
+  margin-bottom: 2rem;
+  text-transform: lowercase;
+}
+
+.modal-uploader-widget {
+  width: 100%;
+  min-height: 300px;
+}
+
+/* Selection Preview Sidebar */
+.selection-preview-sidebar {
+  background: #f8f9fa;
+  border-left: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-header {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.preview-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.preview-close:hover {
+  color: #333;
+}
+
+.preview-header h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem 0;
+  color: #333;
+}
+
+.preview-header p {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0;
+}
+
+.preview-grid {
+  flex: 1;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+.preview-thumbnail {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #e9ecef;
+  border: 1px solid #dee2e6;
+}
+
+.preview-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-thumbnail {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.preview-thumbnail:hover .remove-thumbnail {
+  opacity: 1;
+}
+
+.preview-footer {
+  padding: 1rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.selection-count {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.add-to-cart-btn {
+  width: 100%;
+  background: #28a745;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-to-cart-btn:hover:not(.disabled) {
+  background: #218838;
+  transform: translateY(-1px);
+}
+
+.add-to-cart-btn.disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Mobile Responsive for Modal */
+@media screen and (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    height: 90%;
+  }
+  
+  .modal-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+  }
+  
+  .file-sources-sidebar {
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 0.5rem;
+  }
+  
+  .source-option {
+    padding: 0.75rem 1rem;
+    justify-content: center;
+  }
+  
+  .selection-preview-sidebar {
+    border-left: none;
+    border-top: 1px solid #e0e0e0;
+    max-height: 200px;
+  }
+  
+  .preview-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+  }
+  
+  .upload-title {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-content {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  
+  .upload-area {
+    padding: 1rem;
+  }
+  
+  .upload-title {
+    font-size: 1.25rem;
+  }
 }
