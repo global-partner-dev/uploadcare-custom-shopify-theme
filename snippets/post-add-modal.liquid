@@ -1,0 +1,364 @@
+{% comment %}
+  Renders post-add modal for photo magnets.
+  Usage:
+  {% render 'post-add-modal' %}
+{% endcomment %}
+
+<div id="post-add-modal" class="post-add-modal" style="display: none;">
+  <div class="post-add-modal__overlay"></div>
+  <div class="post-add-modal__content">
+    <div class="post-add-modal__header">
+      <h2 class="post-add-modal__title">Photos Added Successfully!</h2>
+      <button class="post-add-modal__close" id="close-post-add-modal">×</button>
+    </div>
+    
+    <div class="post-add-modal__body">
+      <div class="post-add-modal__icon">
+        <span class="success-icon">✓</span>
+      </div>
+      
+      <div class="post-add-modal__message">
+        <p>Your 9 photos have been added to your cart and will be used to create custom photo magnets.</p>
+        <p class="post-add-modal__sub-message">Each photo will be cropped to fit perfectly on your magnets.</p>
+      </div>
+      
+      <div class="post-add-modal__actions">
+        <button class="post-add-modal__btn post-add-modal__btn--secondary" id="get-more-magnets">
+          <span class="btn-icon">🧲</span>
+          Get More Magnets
+        </button>
+        <button class="post-add-modal__btn post-add-modal__btn--primary" id="go-to-cart">
+          <span class="btn-icon">🛒</span>
+          Go to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .post-add-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .post-add-modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  .post-add-modal__content {
+    position: relative;
+    background: white;
+    border-radius: 16px;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease-out;
+  }
+
+  @keyframes modalSlideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  .post-add-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2rem 1rem 2rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .post-add-modal__title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: rgb(var(--color-foreground));
+  }
+
+  .post-add-modal__close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: rgba(var(--color-foreground), 0.5);
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+
+  .post-add-modal__close:hover {
+    background: rgba(var(--color-foreground), 0.1);
+    color: rgb(var(--color-foreground));
+  }
+
+  .post-add-modal__body {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .post-add-modal__icon {
+    margin-bottom: 1.5rem;
+  }
+
+  .success-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: #2edc6b;
+    color: white;
+    border-radius: 50%;
+    font-size: 2.5rem;
+    font-weight: bold;
+    animation: successPulse 0.6s ease-out;
+  }
+
+  @keyframes successPulse {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  .post-add-modal__message {
+    margin-bottom: 2rem;
+  }
+
+  .post-add-modal__message p {
+    font-size: 1.1rem;
+    color: rgb(var(--color-foreground));
+    margin: 0 0 1rem 0;
+    line-height: 1.5;
+  }
+
+  .post-add-modal__sub-message {
+    font-size: 0.95rem;
+    color: rgba(var(--color-foreground), 0.7);
+  }
+
+  .post-add-modal__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .post-add-modal__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }
+
+  .post-add-modal__btn--primary {
+    background: rgb(var(--color-button));
+    color: rgb(var(--color-button-text));
+  }
+
+  .post-add-modal__btn--primary:hover {
+    background: rgba(var(--color-button), 0.9);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--color-button), 0.3);
+  }
+
+  .post-add-modal__btn--secondary {
+    background: rgba(var(--color-foreground), 0.1);
+    color: rgb(var(--color-foreground));
+  }
+
+  .post-add-modal__btn--secondary:hover {
+    background: rgba(var(--color-foreground), 0.2);
+    transform: translateY(-1px);
+  }
+
+  .btn-icon {
+    font-size: 1.2rem;
+  }
+
+  /* Mobile Responsive */
+  @media screen and (max-width: 768px) {
+    .post-add-modal {
+      padding: 0.5rem;
+    }
+
+    .post-add-modal__content {
+      max-width: 100%;
+      border-radius: 12px;
+    }
+
+    .post-add-modal__header {
+      padding: 1.5rem 1.5rem 1rem 1.5rem;
+    }
+
+    .post-add-modal__title {
+      font-size: 1.25rem;
+    }
+
+    .post-add-modal__body {
+      padding: 1.5rem;
+    }
+
+    .post-add-modal__actions {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+
+    .post-add-modal__btn {
+      padding: 0.875rem 1.25rem;
+    }
+  }
+
+  @media screen and (max-width: 480px) {
+    .post-add-modal__header {
+      padding: 1rem 1rem 0.75rem 1rem;
+    }
+
+    .post-add-modal__body {
+      padding: 1rem;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      font-size: 2rem;
+    }
+
+    .post-add-modal__message p {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+<script>
+  class PostAddModal {
+    constructor() {
+      this.modal = document.getElementById('post-add-modal');
+      this.closeBtn = document.getElementById('close-post-add-modal');
+      this.getMoreBtn = document.getElementById('get-more-magnets');
+      this.goToCartBtn = document.getElementById('go-to-cart');
+      
+      this.init();
+    }
+
+    init() {
+      this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+      // Close modal events
+      if (this.closeBtn) {
+        this.closeBtn.addEventListener('click', () => this.hide());
+      }
+
+      if (this.modal) {
+        this.modal.addEventListener('click', (e) => {
+          if (e.target === this.modal || e.target.classList.contains('post-add-modal__overlay')) {
+            this.hide();
+          }
+        });
+      }
+
+      // Action buttons
+      if (this.getMoreBtn) {
+        this.getMoreBtn.addEventListener('click', () => {
+          this.hide();
+          // Redirect to product page
+          window.location.href = window.location.pathname;
+        });
+      }
+
+      if (this.goToCartBtn) {
+        this.goToCartBtn.addEventListener('click', () => {
+          this.hide();
+          // Redirect to cart
+          window.location.href = '/cart';
+        });
+      }
+
+      // Listen for cart updates
+      document.addEventListener('cart:updated', () => {
+        this.show();
+      });
+
+      // Listen for successful photo upload
+      document.addEventListener('photoUploadUpdated', (event) => {
+        if (event.detail.photos.length === 9) {
+          // Show modal after a short delay to allow cart update
+          setTimeout(() => {
+            this.show();
+          }, 1000);
+        }
+      });
+    }
+
+    show() {
+      if (this.modal) {
+        this.modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        
+        // Focus management
+        const firstButton = this.modal.querySelector('button');
+        if (firstButton) {
+          firstButton.focus();
+        }
+      }
+    }
+
+    hide() {
+      if (this.modal) {
+        this.modal.style.display = 'none';
+        document.body.style.overflow = '';
+      }
+    }
+  }
+
+  // Initialize when DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    if (!window.postAddModal) {
+      window.postAddModal = new PostAddModal();
+    }
+  });
+</script>

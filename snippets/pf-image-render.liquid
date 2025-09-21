@@ -1,0 +1,32 @@
+{% assign responsive_image_srcset = "" %}
+{% assign image_width_query_param = width_query_parameter | prepend: query_delimiter %}
+
+{% assign base_image_url = original_src | append: image_width_query_param | append: "="  %}
+{% assign largest_breakpoint_src = base_image_url | append: biggest_breakpoint %}
+{% assign image_breakpoints = breakpoints | default: biggest_breakpoint %}
+
+{% assign breakpoint_src_fragment = base_image_url | prepend: ", " %}
+{% assign responsive_image_srcset = image_breakpoints | prepend: base_image_url | replace: ",", breakpoint_src_fragment  %}
+
+
+{% if preload %}
+  <link rel="preload"
+    as="image" 
+    href="{{ largest_breakpoint_src }}"
+    fetchpriority="high"
+    imagesrcset="{{ responsive_image_srcset | default: largest_breakpoint_src  }}" 
+    imagesizes="{{ sizes }}"
+  >
+{% else %}
+  {% capture image_content %}
+    <img 
+      src="{{ largest_breakpoint_src }}"
+      srcset="{{ responsive_image_srcset | default: largest_breakpoint_src }}" 
+      width="{{ width }}" 
+      height="{{ height }}"
+      sizes="{{ sizes }}"
+      {{ properties }}
+    />
+  {% endcapture %}
+  {{ image_content | replace: 'width=""', '' | replace: 'height=""', ''  }}
+{% endif %}
