@@ -59,7 +59,7 @@
 }
 
 .select-pictures-btn:hover {
-  background: #ff3742;
+  background:rgb(137, 84, 250);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
 }
@@ -649,16 +649,19 @@
   transition: all 0.3s ease;
 }
 
-.add-to-cart-btn:hover:not(.disabled) {
-  background:#5C5C5C;
+.add-to-cart-btn:hover:not(:disabled) {
+  background: #5C5C5C;
   transform: translateY(-1px);
 }
 
+.add-to-cart-btn:disabled,
 .add-to-cart-btn.disabled {
   background: #6c757d;
   cursor: not-allowed;
   transform: none;
+  opacity: 0.8; /* optional: gives a "faded" disabled look */
 }
+
 
 .cancel-to-cart-btn {
   width: 100%;

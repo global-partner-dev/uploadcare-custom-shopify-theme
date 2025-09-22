@@ -115,6 +115,19 @@
                         .map((u) => `<div class="cell"><img src="${u}" alt="" loading="lazy"></div>`)
                         .join('');
                     }
+
+                  // Toggle modal Add to Cart when exactly 9 images are uploaded
+                  const addBtn = document.getElementById('modal-add-to-cart');
+                  if (addBtn) {
+                    const isComplete = urls.length === 9;
+                    addBtn.disabled = !isComplete;
+
+                    if (isComplete) {
+                      addBtn.classList.remove("disabled");
+                    } else {
+                      addBtn.classList.add("disabled");
+                    }
+                  }
                   });
                 }
               </script>
