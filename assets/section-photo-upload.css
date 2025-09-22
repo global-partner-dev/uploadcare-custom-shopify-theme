@@ -85,7 +85,7 @@
 /* 3x3 placeholder grid shown after Done */
 .drop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 160px);
+  grid-template-columns: repeat(3, 16%); /* 3 equal columns */
   gap: 5px;
   margin-bottom: 5px;
   justify-content: center;
@@ -93,8 +93,8 @@
 
 .drop-grid .cell {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 100%;         /* fill the column */
+  aspect-ratio: 1 / 1; /* keeps it square */
   border: 2px solid rgba(0,0,0,.1);
   border-radius: 8px;
   overflow: hidden;
