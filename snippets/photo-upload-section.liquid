@@ -22,7 +22,7 @@
       <div class="photo-upload-content">
         <!-- Select Pictures Button -->
         <div class="select-pictures-container">
-          <button class="select-pictures-btn" id="select-pictures-btn-{{ section_id }}">
+          <button class="select-pictures-btn" id="select-pictures-btn">
             SELECT PICTURES
           </button>
         </div>
@@ -61,11 +61,15 @@
 
       // Modal close buttons
       const modalClose = document.getElementById(`modal-close`);
+       const modalCloseBottom = document.getElementById('modal-close-bottom');
       const previewClose = document.getElementById(`preview-close`);
       const modalOverlay = document.querySelector(`#photo-selection-modal .modal-overlay`);
 
       if (modalClose) {
         modalClose.addEventListener('click', () => this.closeModal());
+      }
+       if (modalCloseBottom) {
+        modalCloseBottom.addEventListener('click', () => this.closeModal());
       }
       if (previewClose) {
         previewClose.addEventListener('click', () => this.closeModal());
@@ -134,6 +138,7 @@
         // Listen for file upload completion
         this.modalUploader.addEventListener('done', (event) => {
           this.handleUploadComplete(event.detail);
+          this.renderDropGrid();
         });
       }
     }
@@ -277,6 +282,25 @@
     showPostAddModal() {
       // This will be implemented in the modal section
       console.log('Show post-add modal');
+    }
+
+    // Render 3x3 into the center drop area on the product modal
+    renderDropGrid() {
+      const dropGrid = document.getElementById('drop-grid');
+      if (!dropGrid) return;
+      if (this.uploadedPhotos.length !== this.maxPhotos) return;
+      dropGrid.style.display = 'grid';
+      dropGrid.innerHTML = '';
+      this.uploadedPhotos.forEach((p) => {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        const img = document.createElement('img');
+        img.src = p.url;
+        img.alt = 'Uploaded photo';
+        img.loading = 'lazy';
+        cell.appendChild(img);
+        dropGrid.appendChild(cell);
+      });
     }
   }
 
