@@ -99,6 +99,22 @@
               <script type="module">
                 import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.js';
                 UC.defineComponents(UC);
+
+                const ctxProvider = document.querySelector('uc-upload-ctx-provider[ctx-name="modal-photo-uploader"]') || document.querySelector('uc-upload-ctx-provider');
+
+                if (ctxProvider) {
+                  ctxProvider.addEventListener('common-upload-success', (e) => {
+                    const urls = (e?.detail?.successEntries || []).map((entry) => entry.cdnUrl).filter(Boolean).slice(0, 9);
+                    console.log('Uploaded files URL list', urls);
+
+                    // Render into the center Upload Area grid
+                    const grid = document.getElementById('drop-grid');
+                    if (grid && urls.length) {
+                      grid.style.display = 'grid';
+                      grid.innerHTML = urls.map((u) => `<img src="${u}" alt="" loading="lazy">`).join('');
+                    }
+                  });
+                }
               </script>
 
               <uc-config

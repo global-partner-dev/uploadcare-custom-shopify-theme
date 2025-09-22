@@ -123,7 +123,8 @@
     setupModalUploadCare() {
       // Get the modal uploader instance
       this.modalUploader = document.querySelector(`uc-file-uploader-regular[ctx-name="modal-photo-uploader"]`);
-      
+      const ctxProvider = document.querySelector(`uc-upload-ctx-provider[ctx-name="modal-photo-uploader"]`);
+
       if (this.modalUploader) {
         // Listen for file selection
         this.modalUploader.addEventListener('change', (event) => {
@@ -139,6 +140,20 @@
         this.modalUploader.addEventListener('done', (event) => {
           this.handleUploadComplete(event.detail);
           this.renderDropGrid();
+        });
+      }
+
+      // Context-level success event (fires after Done with all successful entries)
+      if (ctxProvider) {
+        ctxProvider.addEventListener('common-upload-success', (e) => {
+          const entries = e?.detail?.successEntries || [];
+          const urls = entries.map(en => en.cdnUrl).filter(Boolean);
+          if (urls.length) {
+            this.uploadedPhotos = urls.slice(0, this.maxPhotos).map((u, i) => ({ id: `ctx-${i}`, url: u }));
+            this.renderDropGrid();
+            this.updateSelectionCount();
+            this.updateModalAddToCartButton();
+          }
         });
       }
     }
