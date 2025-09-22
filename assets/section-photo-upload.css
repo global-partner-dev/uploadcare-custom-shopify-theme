@@ -1,11 +1,11 @@
 /* Photo Upload Section Styles */
 .photo-upload-section {
-  padding: 2rem 0;
+  padding: 0 0;
 }
 
 .photo-upload-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .photo-upload-header {
@@ -28,10 +28,9 @@
 }
 
 .photo-upload-content {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr;
-  gap: 3rem;
-  align-items: start;
+  align-items: start; */
 }
 
 /* Select Pictures Button Styling */
@@ -39,7 +38,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  /* padding: 2rem; */
 }
 
 .select-pictures-btn {
@@ -48,13 +47,14 @@
   border: none;
   border-radius: 8px;
   padding: 1rem 2rem;
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+  width: 100%;
   min-width: 200px;
 }
 
@@ -261,7 +261,7 @@
 /* Mobile Responsive */
 @media screen and (max-width: 768px) {
   .photo-upload-section {
-    padding: 1.5rem 0;
+    padding: 0 0;
   }
   
   .photo-upload-title {
@@ -308,7 +308,7 @@
 
 @media screen and (max-width: 480px) {
   .photo-upload-section {
-    padding: 1rem 0;
+    padding: 0 0;
   }
   
   .photo-upload-container {
@@ -614,6 +614,25 @@
 }
 
 .add-to-cart-btn.disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.cancel-to-cart-btn {
+  width: 100%;
+  background: #ff4757;
+  color: white;
+  border: none;
+  border-radius: 6px;
+}
+
+.cancel-to-cart-btn:hover {
+  background: #ff3742;
+  transform: translateY(-1px);
+}
+
+.cancel-to-cart-btn.disabled {
   background: #6c757d;
   cursor: not-allowed;
   transform: none;
