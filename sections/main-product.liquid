@@ -89,7 +89,7 @@
         <!-- Center - Upload Area -->
         <div class="upload-area">
           <div class="upload-content">
-            <h3 class="upload-title">drag & drop any files</h3>
+            {% comment %} <h3 class="upload-title">drag & drop any files</h3> {% endcomment %}
             <div class="drop-grid" id="drop-grid" style="display:none;"></div>
             <div class="uploadcare-widget-container">
               <link
@@ -111,12 +111,13 @@
                     const grid = document.getElementById('drop-grid');
                     if (grid && urls.length) {
                       grid.style.display = 'grid';
-                      grid.innerHTML = urls.map((u) => `<img src="${u}" alt="" loading="lazy">`).join('');
+                      grid.innerHTML = urls
+                        .map((u) => `<div class="cell"><img src="${u}" alt="" loading="lazy"></div>`)
+                        .join('');
                     }
                   });
                 }
               </script>
-
               <uc-config
                 ctx-name="modal-photo-uploader"
                 source-list="local, camera, facebook, gdrive, dropbox, instagram"

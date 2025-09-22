@@ -42,8 +42,8 @@
 }
 
 .select-pictures-btn {
-  background: #ff4757;
-  color: white;
+  background-color: #9B6BFF; /* lavender accent */
+  color: #fff;
   border: none;
   border-radius: 8px;
   padding: 1rem 2rem;
@@ -73,8 +73,10 @@
 .uploadcare-widget-container {
   background: #fff;
   border-radius: 12px;
-  padding: 10rem 2rem 10rem 2rem;
-  margin: 0 13rem 0 13rem;
+  padding: 1rem 2rem 1rem 2rem;
+  margin: 1px 25% 0px 25%;
+  /* width: 66%;
+  height: 10vh; */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 2px dashed rgba(var(--color-foreground), 0.2);
   transition: border-color 0.3s ease;
@@ -83,15 +85,16 @@
 /* 3x3 placeholder grid shown after Done */
 .drop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 12px;
+  grid-template-columns: repeat(3, 160px);
+  gap: 5px;
+  margin-bottom: 5px;
+  justify-content: center;
 }
 
 .drop-grid .cell {
   position: relative;
-  width: 100%;
-  padding-bottom: 100%;
+  width: 160px;
+  height: 160px;
   border: 2px solid rgba(0,0,0,.1);
   border-radius: 8px;
   overflow: hidden;
@@ -104,6 +107,17 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+@media screen and (max-width: 750px) {
+  .drop-grid {
+    grid-template-columns: repeat(3, 84px);
+    gap: 6px;
+  }
+  .drop-grid .cell {
+    width: 84px;
+    height: 84px;
+  }
 }
 
 .uploadcare-widget-container:hover {
@@ -621,8 +635,8 @@
 
 .add-to-cart-btn {
   width: 100%;
-  background: #28a745;
-  color: white;
+  background-color: #3B3B3B; /* charcoal */
+  color: #FFFFFF;
   border: none;
   border-radius: 10px;
   padding: 1.2rem 1rem;
@@ -636,7 +650,7 @@
 }
 
 .add-to-cart-btn:hover:not(.disabled) {
-  background: #218838;
+  background:#5C5C5C;
   transform: translateY(-1px);
 }
 
@@ -648,8 +662,8 @@
 
 .cancel-to-cart-btn {
   width: 100%;
-  background: #ff4757;
-  color: white;
+  background-color: #B5B5B5; /* muted gray */
+  color: #2B2B2B;
   border: none;
   border-radius: 10px;
   padding: 1.2rem 1rem;
@@ -663,7 +677,7 @@
 }
 
 .cancel-to-cart-btn:hover {
-  background: #ff3742;
+  background:#A0A0A0;
   transform: translateY(-1px);
 }
 
