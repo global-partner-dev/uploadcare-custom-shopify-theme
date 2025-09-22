@@ -172,7 +172,7 @@
     }
 
     updateAddToCartButton() {
-      const addToCartBtn = document.querySelector('.product-form__submit');
+      const addToCartBtn = document.getElementById('ProductSubmitButton-{{ section_id }}');
       const isComplete = this.uploadedPhotos.length === this.maxPhotos;
       
       if (addToCartBtn) {
@@ -217,6 +217,15 @@
   document.addEventListener('DOMContentLoaded', () => {
     if (!window.photoBuyButtons) {
       window.photoBuyButtons = new PhotoBuyButtons();
+      // If the uploader already has photos, sync initial state
+      if (window.photoUploadManager && typeof window.photoUploadManager.getUploadedPhotos === 'function') {
+        const photos = window.photoUploadManager.getUploadedPhotos() || [];
+        if (photos.length) {
+          window.photoBuyButtons.uploadedPhotos = photos;
+          window.photoBuyButtons.updateAddToCartButton();
+          window.photoBuyButtons.updatePhotoUrls();
+        }
+      }
     }
   });
 </script>

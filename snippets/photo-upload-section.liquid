@@ -96,6 +96,12 @@
 
       // Listen for cart updates
       document.addEventListener('cart:updated', () => {
+        // If redirect flag is set, go straight to cart and skip post-add modal
+        if (window._photoAddRedirect) {
+          window._photoAddRedirect = false;
+          window.location.href = '/cart';
+          return;
+        }
         this.showPostAddModal();
       });
     }
@@ -153,6 +159,9 @@
             this.renderDropGrid();
             this.updateSelectionCount();
             this.updateModalAddToCartButton();
+            // Notify product form/buy buttons about current selection
+            const updateEvt = new CustomEvent('photoUploadUpdated', { detail: { photos: this.uploadedPhotos } });
+            document.dispatchEvent(updateEvt);
           }
         });
       }
@@ -220,6 +229,9 @@
       this.updatePreviewGrid();
       this.updateSelectionCount();
       this.updateModalAddToCartButton();
+      // Notify product form/buy buttons about current selection
+      const updateEvt = new CustomEvent('photoUploadUpdated', { detail: { photos: this.uploadedPhotos } });
+      document.dispatchEvent(updateEvt);
     }
 
     updatePreviewGrid() {
@@ -254,6 +266,9 @@
       this.updatePreviewGrid();
       this.updateSelectionCount();
       this.updateModalAddToCartButton();
+      // Notify product form/buy buttons about current selection
+      const updateEvt = new CustomEvent('photoUploadUpdated', { detail: { photos: this.uploadedPhotos } });
+      document.dispatchEvent(updateEvt);
     }
 
     updateSelectionCount() {
@@ -278,16 +293,49 @@
     }
 
     addToCart() {
-      if (this.uploadedPhotos.length === this.maxPhotos) {
-        // Dispatch event for buy buttons to listen to
-        const event = new CustomEvent('photoUploadUpdated', {
-          detail: { photos: this.uploadedPhotos }
-        });
-        document.dispatchEvent(event);
-        
-        // Close modal after adding to cart
-        this.closeModal();
+      if (this.uploadedPhotos.length !== this.maxPhotos) return;
+
+      // Ensure product form is populated with properties, then POST directly to cart
+      const form = document.querySelector('[data-type="add-to-cart-form"]');
+      const variantInput = form && form.querySelector('.product-variant-id');
+      const variantId = variantInput && variantInput.value;
+      if (!variantId) {
+        alert('Variant unavailable. Please select a variant.');
+        return;
       }
+
+      const fd = new FormData();
+      fd.append('id', variantId);
+      fd.append('quantity', '1');
+      this.uploadedPhotos.forEach((photo, index) => {
+        fd.append(`properties[Photo ${index + 1} URL]`, photo.url);
+      });
+      fd.append('properties[Photo URLs Summary]', this.uploadedPhotos.map(p => p.url).join(', '));
+      fd.append('properties[Photo Upload Date]', new Date().toISOString());
+
+      const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
+
+      fetch(addUrl, {
+        method: 'POST',
+        body: fd,
+        credentials: 'same-origin',
+        headers: { 'Accept': 'application/json' }
+      })
+      .then((res) => {
+        if (!res.ok) throw new Error('Add to cart failed');
+        return res.json();
+      })
+      .then(() => {
+        // Notify listeners and redirect
+        const updateEvt = new CustomEvent('photoUploadUpdated', { detail: { photos: this.uploadedPhotos } });
+        document.dispatchEvent(updateEvt);
+        this.closeModal();
+        window.location.href = '/cart';
+      })
+      .catch((err) => {
+        console.error(err);
+        alert('Could not add to cart. Please try again.');
+      });
     }
 
     getUploadedPhotos() {

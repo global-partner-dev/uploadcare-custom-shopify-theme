@@ -320,6 +320,10 @@
 
       // Listen for cart updates
       document.addEventListener('cart:updated', () => {
+        // Skip showing if we intend to redirect to cart
+        if (window._photoAddRedirect) {
+          return;
+        }
         this.show();
       });
 

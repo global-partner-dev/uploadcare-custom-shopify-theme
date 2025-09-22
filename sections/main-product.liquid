@@ -100,11 +100,13 @@
                 import * as UC from 'https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.js';
                 UC.defineComponents(UC);
 
+                let uploadedUrls = [];
                 const ctxProvider = document.querySelector('uc-upload-ctx-provider[ctx-name="modal-photo-uploader"]') || document.querySelector('uc-upload-ctx-provider');
 
                 if (ctxProvider) {
                   ctxProvider.addEventListener('common-upload-success', (e) => {
                     const urls = (e?.detail?.successEntries || []).map((entry) => entry.cdnUrl).filter(Boolean).slice(0, 9);
+                    uploadedUrls = urls;
                     console.log('Uploaded files URL list', urls);
 
                     // Render into the center Upload Area grid
@@ -116,20 +118,94 @@
                         .join('');
                     }
 
-                  // Toggle modal Add to Cart when exactly 9 images are uploaded
-                  const addBtn = document.getElementById('modal-add-to-cart');
-                  if (addBtn) {
-                    const isComplete = urls.length === 9;
-                    addBtn.disabled = !isComplete;
-
-                    if (isComplete) {
-                      addBtn.classList.remove("disabled");
-                    } else {
-                      addBtn.classList.add("disabled");
+                    // Toggle modal Add to Cart when exactly 9 images are uploaded
+                    const modalAddBtn = document.getElementById('modal-add-to-cart');
+                    if (modalAddBtn) {
+                      const isComplete = urls.length === 9;
+                      modalAddBtn.disabled = !isComplete;
+                      if (isComplete) {
+                        modalAddBtn.classList.remove("disabled");
+                      } else {
+                        modalAddBtn.classList.add("disabled");
+                      }
                     }
-                  }
+
+                    // Notify product form/buy buttons so main Add to Cart enables
+                    const photos = urls.map((u) => ({ url: u }));
+                    document.dispatchEvent(new CustomEvent('photoUploadUpdated', { detail: { photos } }));
                   });
                 }
+
+                // Also wire to the uploader element events as a fallback
+                const uploaderEl = document.querySelector('uc-file-uploader-regular[ctx-name="modal-photo-uploader"]') || document.querySelector('uc-file-uploader-regular');
+                const propagate = (urls) => {
+                  uploadedUrls = (urls || []).filter(Boolean).slice(0, 9);
+                  const grid = document.getElementById('drop-grid');
+                  if (grid && uploadedUrls.length) {
+                    grid.style.display = 'grid';
+                    grid.innerHTML = uploadedUrls
+                      .map((u) => `<div class=\"cell\"><img src=\"${u}\" alt=\"\" loading=\"lazy\"></div>`)
+                      .join('');
+                  }
+                  const modalAddBtn = document.getElementById('modal-add-to-cart');
+                  if (modalAddBtn) {
+                    const isComplete = uploadedUrls.length === 9;
+                    modalAddBtn.disabled = !isComplete;
+                    if (isComplete) modalAddBtn.classList.remove('disabled'); else modalAddBtn.classList.add('disabled');
+                  }
+                  const photos = uploadedUrls.map((u) => ({ url: u }));
+                  document.dispatchEvent(new CustomEvent('photoUploadUpdated', { detail: { photos } }));
+                };
+
+                if (uploaderEl) {
+                  uploaderEl.addEventListener('done', (ev) => {
+                    try {
+                      const files = ev?.detail || [];
+                      const urls = files.map((f) => f?.cdnUrl).filter(Boolean);
+                      propagate(urls);
+                    } catch (_) {}
+                  });
+                  uploaderEl.addEventListener('change', (ev) => {
+                    try {
+                      const files = ev?.detail || [];
+                      const urls = files.map((f) => f?.cdnUrl).filter(Boolean);
+                      propagate(urls);
+                    } catch (_) {}
+                  });
+                }
+
+                // Modal Add to Cart: post directly and redirect
+                document.addEventListener('DOMContentLoaded', () => {
+                  const modalAddBtn = document.getElementById('modal-add-to-cart');
+                  if (modalAddBtn) {
+                    modalAddBtn.addEventListener('click', () => {
+                      if (uploadedUrls.length !== 9) return;
+
+                      const form = document.querySelector('[data-type="add-to-cart-form"]');
+                      const variantInput = form && form.querySelector('.product-variant-id');
+                      const variantId = variantInput && variantInput.value;
+                      if (!variantId) {
+                        alert('Variant unavailable. Please select a variant.');
+                        return;
+                      }
+
+                      const fd = new FormData();
+                      fd.append('id', variantId);
+                      fd.append('quantity', '1');
+                      uploadedUrls.forEach((u, idx) => {
+                        fd.append(`properties[Photo ${idx + 1} URL]`, u);
+                      });
+                      fd.append('properties[Photo URLs Summary]', uploadedUrls.join(', '));
+                      fd.append('properties[Photo Upload Date]', new Date().toISOString());
+
+                      const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
+                      fetch(addUrl, { method: 'POST', body: fd, credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
+                        .then((res) => { if (!res.ok) throw new Error('Add to cart failed'); return res.json(); })
+                        .then(() => { window.location.href = '/cart'; })
+                        .catch((err) => { console.error(err); alert('Could not add to cart. Please try again.'); });
+                    });
+                  }
+                });
               </script>
               <uc-config
                 ctx-name="modal-photo-uploader"
@@ -171,9 +247,6 @@
           </div>
           
           <div class="preview-footer">
-            <div class="selection-count">
-              <span id="selection-count">Selected 0 of 9</span>
-            </div>
             <button class="add-to-cart-btn" id="modal-add-to-cart" disabled>
               ADD TO CART
             </button>
