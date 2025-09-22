@@ -178,7 +178,7 @@ if (!customElements.get('product-info')) {
           this.updateMedia(html, variant?.featured_media?.id);
 
           const updateSourceFromDestination = (id, shouldHide = (source) => false) => {
-            const source = html.getElementById(`${id}-${this.sectionId}`);
+            const source = html.getElementById(`${id}`);
             const destination = this.querySelector(`#${id}-${this.dataset.section}`);
             if (source && destination) {
               destination.innerHTML = source.innerHTML;
@@ -197,7 +197,7 @@ if (!customElements.get('product-info')) {
           this.querySelector(`#Volume-Note-${this.dataset.section}`)?.classList.remove('hidden');
 
           this.productForm?.toggleSubmitButton(
-            html.getElementById(`ProductSubmitButton-${this.sectionId}`)?.hasAttribute('disabled') ?? true,
+            html.getElementById(`ProductSubmitButton`)?.hasAttribute('disabled') ?? true,
             window.variantStrings.soldOut
           );
 

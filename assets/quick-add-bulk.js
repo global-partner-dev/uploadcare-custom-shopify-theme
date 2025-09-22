@@ -91,7 +91,7 @@ if (!customElements.get('quick-add-bulk')) {
             .then((response) => response.text())
             .then((responseText) => {
               const html = new DOMParser().parseFromString(responseText, 'text/html');
-              const sourceQty = html.querySelector(`#quick-add-bulk-${this.dataset.index}-${this.sectionId}`);
+              const sourceQty = html.querySelector(`#quick-add-bulk-${this.dataset.index}`);
               if (sourceQty) {
                 this.innerHTML = sourceQty.innerHTML;
               }
@@ -148,9 +148,9 @@ if (!customElements.get('quick-add-bulk')) {
       getSectionsToRender() {
         return [
           {
-            id: `quick-add-bulk-${this.dataset.index}-${this.sectionId}`,
+            id: `quick-add-bulk-${this.dataset.index}`,
             section: this.sectionId,
-            selector: `#quick-add-bulk-${this.dataset.index}-${this.sectionId}`,
+            selector: `#quick-add-bulk-${this.dataset.index}`,
           },
           {
             id: 'cart-icon-bubble',

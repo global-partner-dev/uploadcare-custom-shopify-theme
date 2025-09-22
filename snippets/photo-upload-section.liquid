@@ -51,7 +51,7 @@
 
     setupEventListeners() {
       // Select Pictures button
-      const selectPicturesBtn = document.getElementById(`select-pictures-btn-${this.sectionId}`);
+      const selectPicturesBtn = document.getElementById(`select-pictures-btn`);
 
       if (selectPicturesBtn) {
         selectPicturesBtn.addEventListener('click', () => {
@@ -61,8 +61,8 @@
 
       // Modal close buttons
       const modalClose = document.getElementById(`modal-close`);
-      const previewClose = document.getElementById(`preview-close-${this.sectionId}`);
-      const modalOverlay = document.querySelector(`#photo-selection-modal-${this.sectionId} .modal-overlay`);
+      const previewClose = document.getElementById(`preview-close`);
+      const modalOverlay = document.querySelector(`#photo-selection-modal .modal-overlay`);
 
       if (modalClose) {
         modalClose.addEventListener('click', () => this.closeModal());
@@ -75,7 +75,7 @@
       }
 
       // Source selection
-      const sourceOptions = document.querySelectorAll(`#photo-selection-modal-${this.sectionId} .source-option`);
+      const sourceOptions = document.querySelectorAll(`#photo-selection-modal .source-option`);
       sourceOptions.forEach(option => {
         option.addEventListener('click', () => {
           this.selectSource(option);
@@ -83,7 +83,7 @@
       });
 
       // Add to cart button in modal
-      const modalAddToCart = document.getElementById(`modal-add-to-cart-${this.sectionId}`);
+      const modalAddToCart = document.getElementById(`modal-add-to-cart`);
       if (modalAddToCart) {
         modalAddToCart.addEventListener('click', () => {
           this.addToCart();
@@ -118,7 +118,7 @@
 
     setupModalUploadCare() {
       // Get the modal uploader instance
-      this.modalUploader = document.querySelector(`uc-file-uploader-regular[ctx-name="modal-photo-uploader-${this.sectionId}"]`);
+      this.modalUploader = document.querySelector(`uc-file-uploader-regular[ctx-name="modal-photo-uploader"]`);
       
       if (this.modalUploader) {
         // Listen for file selection
@@ -203,7 +203,7 @@
     }
 
     updatePreviewGrid() {
-      const grid = document.getElementById(`preview-grid-${this.sectionId}`);
+      const grid = document.getElementById(`preview-grid`);
       if (!grid) return;
 
       // Clear existing content
@@ -237,14 +237,14 @@
     }
 
     updateSelectionCount() {
-      const countElement = document.getElementById(`selection-count-${this.sectionId}`);
+      const countElement = document.getElementById(`selection-count`);
       if (countElement) {
         countElement.textContent = `Selected ${this.uploadedPhotos.length} of ${this.maxPhotos}`;
       }
     }
 
     updateModalAddToCartButton() {
-      const addToCartBtn = document.getElementById(`modal-add-to-cart-${this.sectionId}`);
+      const addToCartBtn = document.getElementById(`modal-add-to-cart`);
       const isComplete = this.uploadedPhotos.length === this.maxPhotos;
       
       if (addToCartBtn) {

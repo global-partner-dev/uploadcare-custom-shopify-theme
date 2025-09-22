@@ -73,7 +73,8 @@
 .uploadcare-widget-container {
   background: #fff;
   border-radius: 12px;
-  padding: 2rem;
+  padding: 10rem 2rem 10rem 2rem;
+  margin: 0 13rem 0 13rem;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 2px dashed rgba(var(--color-foreground), 0.2);
   transition: border-color 0.3s ease;
@@ -458,46 +459,8 @@
 
 .modal-layout {
   display: grid;
-  grid-template-columns: 200px 1fr 300px;
+  grid-template-columns: 1fr 400px;
   height: 100%;
-}
-
-/* File Sources Sidebar */
-.file-sources-sidebar {
-  background: #f8f9fa;
-  border-right: 1px solid #e0e0e0;
-  padding: 1rem 0;
-}
-
-.source-option {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  border-left: 3px solid transparent;
-}
-
-.source-option:hover {
-  background: #e9ecef;
-}
-
-.source-option.active {
-  background: #e3f2fd;
-  border-left-color: #2196f3;
-  color: #1976d2;
-}
-
-.source-icon {
-  font-size: 1.2rem;
-  width: 24px;
-  text-align: center;
-}
-
-.source-option span {
-  font-size: 0.9rem;
-  font-weight: 500;
 }
 
 /* Upload Area */
@@ -660,13 +623,7 @@
 @media screen and (max-width: 768px) {
   .modal-layout {
     grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-  }
-  
-  .file-sources-sidebar {
-    border-right: none;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 0.5rem;
+    grid-template-rows: 1fr auto;
   }
   
   .source-option {
