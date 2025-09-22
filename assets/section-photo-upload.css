@@ -598,9 +598,10 @@
   background: #28a745;
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+  border-radius: 10px;
+  padding: 1.2rem 1rem;
+  font-size: 1.2rem;
+  margin: 3px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -624,7 +625,15 @@
   background: #ff4757;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 10px;
+  padding: 1.2rem 1rem;
+  font-size: 1.2rem;
+  margin: 3px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .cancel-to-cart-btn:hover {
