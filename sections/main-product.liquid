@@ -286,16 +286,42 @@
           </div>
         </div>
 
-        <!-- Right Sidebar - Selection Preview -->
+        <!-- Right Sidebar - Upsell Products -->
         <div class="selection-preview-sidebar">
           <div class="preview-header">
             <button class="preview-close" id="preview-close">&times;</button>
-            <h4>Upsell logic</h4>
-            <p>This is Upsell logic filed</p>
+            <h3>Try Special Product!</h3>
           </div>
           
           <div class="preview-grid" id="preview-grid">
-            <!-- Preview thumbnails will be inserted here -->
+            {%- if product.title == '9 Little Memory Photo Magnets' -%}
+              {%- assign nft_chip = all_products['nft-chip'] -%}
+              {%- assign order_photo_frame = all_products['order-photo-frame'] -%}
+
+              {%- if nft_chip -%}
+                <div class="upsell-card">
+                  <a href="{{ nft_chip.url }}" class="upsell-image-link">
+                    <img src="{{ nft_chip.featured_image | image_url: width: 300 }}" alt="{{ nft_chip.title | escape }}" loading="lazy" width="300" height="300">
+                  </a>
+                  <div class="upsell-info">
+                    <div class="upsell-title">{{ nft_chip.title }}</div>
+                    <a class="upsell-button" href="{{ nft_chip.url }}">try it</a>
+                  </div>
+                </div>
+              {%- endif -%}
+
+              {%- if order_photo_frame -%}
+                <div class="upsell-card">
+                  <a href="{{ order_photo_frame.url }}" class="upsell-image-link">
+                    <img src="{{ order_photo_frame.featured_image | image_url: width: 300 }}" alt="{{ order_photo_frame.title | escape }}" loading="lazy" width="300" height="300">
+                  </a>
+                  <div class="upsell-info">
+                    <div class="upsell-title">{{ order_photo_frame.title }}</div>
+                    <a class="upsell-button" href="{{ order_photo_frame.url }}">try it</a>
+                  </div>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
           </div>
           
           <div class="preview-footer">
