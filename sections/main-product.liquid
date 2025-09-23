@@ -122,7 +122,7 @@
                     // Toggle modal Add to Cart when exactly 9 images are uploaded
                     const modalAddBtn = document.getElementById('modal-add-to-cart');
                     // Required photos derived server-side to keep logic in sync
-                    const required = ({{ product.title | json }} === 'NFT Chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
+                    const required = ({{ product.title | json }} === 'NFT chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
                     if (modalAddBtn) {
                       const isComplete = urls.length === required;
                       modalAddBtn.disabled = !isComplete;
@@ -182,7 +182,7 @@
                   const modalAddBtn = document.getElementById('modal-add-to-cart');
                   if (modalAddBtn) {
                     modalAddBtn.addEventListener('click', () => {
-                      const required = ({{ product.title | json }} === 'NFT Chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
+                      const required = ({{ product.title | json }} === 'NFT chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
                       if (uploadedUrls.length !== required) return;
 
                       const form = document.querySelector('[data-type="add-to-cart-form"]');
@@ -213,7 +213,7 @@
               </script>
               {%- liquid
                 assign required_photos = 9
-                if product.title == 'NFT Chip'
+                if product.title == 'NFT chip'
                   assign required_photos = 1
                 elsif product.title == 'Order Photo Frame'
                   assign required_photos = 0

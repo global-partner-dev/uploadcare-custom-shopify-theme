@@ -19,8 +19,13 @@
   <div class="page-width">
     <div class="photo-upload-container">
       <div class="photo-upload-header">
-        <h2 class="photo-upload-title">{{ block.settings.title | default: 'Upload Your Photos' }}</h2>
-        <p class="photo-upload-description">{{ block.settings.description | default: 'Upload exactly 9 photos to create your custom photo magnets' }}</p>
+        {%- if product.title == 'NFT chip' -%}
+          <h2 class="photo-upload-title">{{ 'Upload Your Audio' }}</h2>
+          <p class="photo-upload-description">{{'Upload 1 audio to create your NFT chip' }}</p>
+        {%- else -%}
+          <h2 class="photo-upload-title">{{ block.settings.title | default: 'Upload Your Photos' }}</h2>
+          <p class="photo-upload-description">{{ block.settings.description | default: 'Upload exactly 9 photos to create your custom photo magnets' }}</p>
+        {%- endif -%}
       </div>
 
       <div class="photo-upload-content">
@@ -28,7 +33,11 @@
         {%- unless is_order_photo_frame -%}
           <div class="select-pictures-container">
             <button class="select-pictures-btn" id="select-pictures-btn">
-              SELECT PICTURES
+              {%- if product.title == 'NFT chip' -%}
+                SELECT AUDIO
+              {%- else -%}
+                SELECT PICTURES
+              {%- endif -%}
             </button>
           </div>
         {%- endunless -%}
@@ -47,7 +56,7 @@
       // Default 9, overridden per product title
       this.maxPhotos = (() => {
         const t = (window?.Shopify?.routes || {}) && ({{ product.title | json }});
-        if ({{ product.title | json }} === 'NFT Chip') return 1;
+        if ({{ product.title | json }} === 'NFT chip') return 1;
         if ({{ product.title | json }} === 'Order Photo Frame') return 0;
         return 9;
       })();

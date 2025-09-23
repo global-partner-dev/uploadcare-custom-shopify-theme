@@ -67,7 +67,7 @@
 
         {%- liquid
           assign required_photos = 9
-          if product.title == 'NFT Chip'
+          if product.title == 'NFT chip'
             assign required_photos = 1
           elsif product.title == 'Order Photo Frame'
             assign required_photos = 0
@@ -94,7 +94,11 @@
               {%- if required_photos == 0 -%}
                 Add to Cart
               {%- elsif required_photos == 1 -%}
-                Upload 1 photo to add to cart
+                {%- if product.title == 'NFT chip' -%}
+                  Upload 1 audio to add to cart
+                {%- else -%}
+                  Upload 1 photo to add to cart
+                {%- endif -%}
               {%- else -%}
                 Upload {{ required_photos }} photos to add to cart
               {%- endif -%}
@@ -165,7 +169,7 @@
       // Set per product title
       this.maxPhotos = (function() {
         const title = {{ product.title | json }};
-        if (title === 'NFT Chip') return 1;
+        if (title === 'NFT chip') return 1;
         if (title === 'Order Photo Frame') return 0;
         return 9;
       })();
@@ -209,7 +213,11 @@
           addToCartBtn.classList.remove('btn--disabled');
         } else {
           addToCartBtn.disabled = true;
-          addToCartBtn.textContent = `Upload ${this.maxPhotos - this.uploadedPhotos.length} more photos`;
+          {%- if product.title == 'NFT chip' -%}
+            addToCartBtn.textContent = `Upload 1 audio`;
+          {%- else -%}
+            addToCartBtn.textContent = `Upload ${this.maxPhotos - this.uploadedPhotos.length} more photos`;
+          {%- endif -%}
           addToCartBtn.classList.add('btn--disabled');
         }
       }
