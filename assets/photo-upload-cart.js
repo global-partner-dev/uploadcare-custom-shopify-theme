@@ -30,12 +30,12 @@ class PhotoUploadCart {
     const form = e.target;
     const photoUrls = this.getPhotoUrls();
     
-    if (photoUrls.length === 9) {
+    if (photoUrls.length === 9 || photoUrls.length === 1) {
       // Add photo URLs to form data
       this.addPhotoUrlsToForm(form, photoUrls);
     } else {
       e.preventDefault();
-      alert('Please upload exactly 9 photos before adding to cart.');
+      // alert('Please upload exactly 9 photos before adding to cart.');
       return false;
     }
   }
