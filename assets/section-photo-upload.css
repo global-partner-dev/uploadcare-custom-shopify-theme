@@ -42,11 +42,11 @@
 }
 
 .select-pictures-btn {
-  background-color: #9B6BFF; /* lavender accent */
+  background-color: #2bdd4f; /* lavender accent */
   color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 1rem 2rem;
+  border-radius: 25px;
+  padding: 1.3rem 2rem;
   font-size: clamp(1rem, 2vw, 1.5rem); /* scales text based on screen width */
   font-weight: 600;
   text-transform: uppercase;
@@ -709,9 +709,9 @@
   background-color: #079251c9; /* charcoal */
   color: #FFFFFF;
   border: none;
-  border-radius: 10px;
-  padding: 1.2rem 1rem;
-  font-size: 1.2rem;
+  border-radius: 25px;
+  padding: 1.5rem 1rem;
+  font-size: 1.5rem;
   margin: 3px 20px 3px 0px;
   font-weight: 600;
   text-transform: uppercase;
@@ -739,9 +739,9 @@
   background-color: #8de6ed4a; /* muted gray */
   color: #2B2B2B;
   border: none;
-  border-radius: 10px;
-  padding: 1.2rem 1rem;
-  font-size: 1.2rem;
+  border-radius: 25px;
+  padding: 1.5rem 1rem;
+  font-size: 1.5rem;
   margin: 3px 20px 3px 0px;
   font-weight: 600;
   text-transform: uppercase;
