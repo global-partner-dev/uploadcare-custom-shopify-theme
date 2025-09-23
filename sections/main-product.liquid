@@ -227,10 +227,15 @@
                       fd.append('id', variantId);
                       fd.append('quantity', '1');
                       uploadedUrls.forEach((u, idx) => {
-                        fd.append(`properties[Photo ${idx + 1} URL]`, u);
+                        const isAudio = {{ product.title | json }} === 'NFT chip';
+                        const prefix = isAudio ? 'Audio' : 'Photo';
+                        fd.append(`properties[${prefix} ${idx + 1} URL]`, u);
                       });
-                      fd.append('properties[Photo URLs Summary]', uploadedUrls.join(', '));
-                      fd.append('properties[Photo Upload Date]', new Date().toISOString());
+                      const isAudio = {{ product.title | json }} === 'NFT chip';
+                      const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
+                      const uploadDateKey = isAudio ? 'Audio Upload Date' : 'Photo Upload Date';
+                      fd.append(`properties[${summaryKey}]`, uploadedUrls.join(', '));
+                      fd.append(`properties[${uploadDateKey}]`, new Date().toISOString());
 
                       const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
                       fetch(addUrl, { method: 'POST', body: fd, credentials: 'same-origin', headers: { 'Accept': 'application/json' } })

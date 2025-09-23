@@ -50,14 +50,18 @@ class PhotoUploadCart {
 
   addPhotoUrlsToForm(form, photoUrls) {
     // Remove existing photo URL inputs
-    const existingInputs = form.querySelectorAll('input[name^="properties[Photo"]');
+    const existingInputs = form.querySelectorAll('input[name^="properties[Photo"], input[name^="properties[Audio"]');
     existingInputs.forEach(input => input.remove());
 
     // Add new photo URL inputs
     photoUrls.forEach((photo, index) => {
       const input = document.createElement('input');
       input.type = 'hidden';
-      input.name = `properties[Photo ${index + 1} URL]`;
+      // Check if this is for NFT chip (audio) or other products (photos)
+      const isAudio = window.location.pathname.includes('nft-chip') || 
+                     document.querySelector('h1')?.textContent?.includes('NFT chip');
+      const prefix = isAudio ? 'Audio' : 'Photo';
+      input.name = `properties[${prefix} ${index + 1} URL]`;
       input.value = photo.url;
       form.appendChild(input);
     });
@@ -65,14 +69,18 @@ class PhotoUploadCart {
     // Add summary input
     const summaryInput = document.createElement('input');
     summaryInput.type = 'hidden';
-    summaryInput.name = 'properties[Photo URLs Summary]';
+    const isAudio = window.location.pathname.includes('nft-chip') || 
+                   document.querySelector('h1')?.textContent?.includes('NFT chip');
+    const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
+    const uploadDateKey = isAudio ? 'Audio Upload Date' : 'Photo Upload Date';
+    summaryInput.name = `properties[${summaryKey}]`;
     summaryInput.value = photoUrls.map(photo => photo.url).join(', ');
     form.appendChild(summaryInput);
 
     // Add metadata
     const metadataInput = document.createElement('input');
     metadataInput.type = 'hidden';
-    metadataInput.name = 'properties[Photo Upload Date]';
+    metadataInput.name = `properties[${uploadDateKey}]`;
     metadataInput.value = new Date().toISOString();
     form.appendChild(metadataInput);
   }

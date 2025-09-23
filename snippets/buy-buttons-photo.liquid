@@ -233,7 +233,9 @@
         this.uploadedPhotos.forEach((photo, index) => {
           const input = document.createElement('input');
           input.type = 'hidden';
-          input.name = `properties[Photo ${index + 1} URL]`;
+          const isAudio = {{ product.title | json }} === 'NFT chip';
+          const prefix = isAudio ? 'Audio' : 'Photo';
+          input.name = `properties[${prefix} ${index + 1} URL]`;
           input.value = photo.url;
           container.appendChild(input);
         });
@@ -241,7 +243,9 @@
         // Add a summary input with all URLs
         const summaryInput = document.createElement('input');
         summaryInput.type = 'hidden';
-        summaryInput.name = 'properties[Photo URLs Summary]';
+        const isAudio = {{ product.title | json }} === 'NFT chip';
+        const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
+        summaryInput.name = `properties[${summaryKey}]`;
         summaryInput.value = this.uploadedPhotos.map(photo => photo.url).join(', ');
         container.appendChild(summaryInput);
       }
