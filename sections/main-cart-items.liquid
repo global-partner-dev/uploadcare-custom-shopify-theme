@@ -145,7 +145,7 @@
                             {%- endfor -%}
                           {%- endif -%}
 
-                          {%- for property in item.properties -%}
+                          {% comment %} {%- for property in item.properties -%}
                             {%- assign property_first_char = property.first | slice: 0 -%}
                             {%- if property.last != blank and property_first_char != '_' -%}
                               <div class="product-option">
@@ -161,7 +161,7 @@
                                 </dd>
                               </div>
                             {%- endif -%}
-                          {%- endfor -%}
+                          {%- endfor -%} {% endcomment %}
                         </dl>
 
                         <p class="product-option">{{ item.selling_plan_allocation.selling_plan.name }}</p>
