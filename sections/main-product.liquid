@@ -114,9 +114,24 @@
                     const grid = document.getElementById('drop-grid');
                     if (grid && urls.length) {
                       grid.style.display = 'grid';
-                      grid.innerHTML = urls
-                        .map((u) => `<div class="cell"><img src="${u}" alt="" loading="lazy"></div>`)
-                        .join('');
+                      const isAudio = {{ product.title | json }} === 'NFT chip';
+                      if (isAudio) {
+                        // Show file list for audio
+                        grid.innerHTML = urls
+                          .map((u, index) => `<div class="cell audio-file">
+                            <div class="audio-file-info">
+                              <div class="audio-icon">🎵</div>
+                              <div class="file-name">Audio File ${index + 1}</div>
+                              <div class="file-url">${u.split('/').pop()}</div>
+                            </div>
+                          </div>`)
+                          .join('');
+                      } else {
+                        // Show image grid for photos
+                        grid.innerHTML = urls
+                          .map((u) => `<div class="cell"><img src="${u}" alt="" loading="lazy"></div>`)
+                          .join('');
+                      }
                     }
 
                     // Toggle modal Add to Cart when exactly 9 images are uploaded
@@ -146,9 +161,24 @@
                   const grid = document.getElementById('drop-grid');
                   if (grid && uploadedUrls.length) {
                     grid.style.display = 'grid';
-                    grid.innerHTML = uploadedUrls
-                      .map((u) => `<div class=\"cell\"><img src=\"${u}\" alt=\"\" loading=\"lazy\"></div>`)
-                      .join('');
+                    const isAudio = {{ product.title | json }} === 'NFT chip';
+                    if (isAudio) {
+                      // Show file list for audio
+                      grid.innerHTML = uploadedUrls
+                        .map((u, index) => `<div class="cell audio-file">
+                          <div class="audio-file-info">
+                            <div class="audio-icon">🎵</div>
+                            <div class="file-name">Audio File ${index + 1}</div>
+                            <div class="file-url">${u.split('/').pop()}</div>
+                          </div>
+                        </div>`)
+                        .join('');
+                    } else {
+                      // Show image grid for photos
+                      grid.innerHTML = uploadedUrls
+                        .map((u) => `<div class=\"cell\"><img src=\"${u}\" alt=\"\" loading=\"lazy\"></div>`)
+                        .join('');
+                    }
                   }
                   const modalAddBtn = document.getElementById('modal-add-to-cart');
                   if (modalAddBtn) {

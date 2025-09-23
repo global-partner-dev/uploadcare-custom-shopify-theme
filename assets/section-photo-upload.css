@@ -111,6 +111,44 @@
   justify-content: center;
 }
 
+/* Audio File Display Styles */
+.audio-file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border: 2px solid rgba(0,0,0,.1);
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 80px;
+}
+
+.audio-file-info {
+  text-align: center;
+  color: #333;
+}
+
+.audio-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.file-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.file-url {
+  font-size: 0.75rem;
+  color: #666;
+  word-break: break-all;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .drop-grid .cell {
   position: relative;
   width: 100%;         /* fill the column */
