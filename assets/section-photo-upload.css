@@ -93,8 +93,8 @@
 .uploadcare-widget-container {
   background: #fff;
   border-radius: 12px;
-  padding: 1rem 2rem 1rem 2rem;
-  margin: 1px 25% 0px 25%;
+  padding: 2rem 2rem 2rem 2rem;
+  margin: 10px 28% 0px 28%;
   /* width: 66%;
   height: 10vh; */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -706,7 +706,7 @@
 
 .add-to-cart-btn {
   width: 100%;
-  background-color: #3B3B3B; /* charcoal */
+  background-color: #079251c9; /* charcoal */
   color: #FFFFFF;
   border: none;
   border-radius: 10px;
@@ -721,13 +721,13 @@
 }
 
 .add-to-cart-btn:hover:not(:disabled) {
-  background: #5C5C5C;
+  background: #08d174c9;
   transform: translateY(-1px);
 }
 
 .add-to-cart-btn:disabled,
 .add-to-cart-btn.disabled {
-  background: #6c757d;
+  background: #08d174c9;
   cursor: not-allowed;
   transform: none;
   opacity: 0.8; /* optional: gives a "faded" disabled look */
@@ -736,7 +736,7 @@
 
 .cancel-to-cart-btn {
   width: 100%;
-  background-color: #B5B5B5; /* muted gray */
+  background-color: #8de6ed4a; /* muted gray */
   color: #2B2B2B;
   border: none;
   border-radius: 10px;
@@ -751,12 +751,12 @@
 }
 
 .cancel-to-cart-btn:hover {
-  background:#A0A0A0;
+  background:#7fe5ec4a;
   transform: translateY(-1px);
 }
 
 .cancel-to-cart-btn.disabled {
-  background: #6c757d;
+  background: #8de6ed4a;
   cursor: not-allowed;
   transform: none;
 }
