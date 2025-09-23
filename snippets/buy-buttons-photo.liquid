@@ -65,6 +65,14 @@
           {%- render 'gift-card-recipient-form', product: product, form: form, section: section -%}
         {%- endif -%}
 
+        {%- liquid
+          assign required_photos = 9
+          if product.title == 'NFT Chip'
+            assign required_photos = 1
+          elsif product.title == 'Order Photo Frame'
+            assign required_photos = 0
+          endif
+        -%}
         <div class="product-form__buttons">
           {%- liquid
             assign check_against_inventory = true
@@ -79,10 +87,18 @@
             id="ProductSubmitButton-{{ section_id }}"
             type="submit"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %} btn--disabled"
-            disabled
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}{% if required_photos > 0 %} btn--disabled{% endif %}"
+            {% if required_photos > 0 %}disabled{% endif %}
           >
-            <span>Upload 9 photos to add to cart</span>
+            <span>
+              {%- if required_photos == 0 -%}
+                Add to Cart
+              {%- elsif required_photos == 1 -%}
+                Upload 1 photo to add to cart
+              {%- else -%}
+                Upload {{ required_photos }} photos to add to cart
+              {%- endif -%}
+            </span>
             {%- render 'loading-spinner' -%}
           </button>
           {%- if show_dynamic_checkout -%}
@@ -146,7 +162,13 @@
   class PhotoBuyButtons {
     constructor() {
       this.uploadedPhotos = [];
-      this.maxPhotos = 9;
+      // Set per product title
+      this.maxPhotos = (function() {
+        const title = {{ product.title | json }};
+        if (title === 'NFT Chip') return 1;
+        if (title === 'Order Photo Frame') return 0;
+        return 9;
+      })();
       this.init();
     }
 
@@ -162,9 +184,14 @@
       const form = document.querySelector('[data-type="add-to-cart-form"]');
       if (form) {
         form.addEventListener('submit', (e) => {
+          if (this.maxPhotos === 0) {
+            // No gating for Order Photo Frame
+            return;
+          }
           if (this.uploadedPhotos.length !== this.maxPhotos) {
             e.preventDefault();
-            alert('Please upload exactly 9 photos before adding to cart.');
+            const remaining = Math.max(this.maxPhotos - this.uploadedPhotos.length, 0);
+            alert(`Please upload ${remaining} more photo${remaining === 1 ? '' : 's'} before adding to cart.`);
             return false;
           }
         });

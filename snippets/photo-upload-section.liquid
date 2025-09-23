@@ -11,7 +11,11 @@
 
 {{ 'section-photo-upload.css' | asset_url | stylesheet_tag }}
 
-<div class="photo-upload-section section-{{ section_id }}-padding gradient color-{{ block.settings.color_scheme | default: 'scheme-1' }}" {{ block.shopify_attributes }}>
+{%- assign is_order_photo_frame = false -%}
+{%- if product.title == 'Order Photo Frame' -%}
+  {%- assign is_order_photo_frame = true -%}
+{%- endif -%}
+<div class="photo-upload-section section-{{ section_id }}-padding gradient color-{{ block.settings.color_scheme | default: 'scheme-1' }}" {{ block.shopify_attributes }}{% if is_order_photo_frame %} style="display:none;"{% endif %}>
   <div class="page-width">
     <div class="photo-upload-container">
       <div class="photo-upload-header">
@@ -21,11 +25,13 @@
 
       <div class="photo-upload-content">
         <!-- Select Pictures Button -->
-        <div class="select-pictures-container">
-          <button class="select-pictures-btn" id="select-pictures-btn">
-            SELECT PICTURES
-          </button>
-        </div>
+        {%- unless is_order_photo_frame -%}
+          <div class="select-pictures-container">
+            <button class="select-pictures-btn" id="select-pictures-btn">
+              SELECT PICTURES
+            </button>
+          </div>
+        {%- endunless -%}
       </div>
     </div>
   </div>
@@ -38,7 +44,13 @@
     constructor(sectionId) {
       this.sectionId = sectionId;
       this.uploadedPhotos = [];
-      this.maxPhotos = 9;
+      // Default 9, overridden per product title
+      this.maxPhotos = (() => {
+        const t = (window?.Shopify?.routes || {}) && ({{ product.title | json }});
+        if ({{ product.title | json }} === 'NFT Chip') return 1;
+        if ({{ product.title | json }} === 'Order Photo Frame') return 0;
+        return 9;
+      })();
       this.modalUploader = null;
       this.isModalOpen = false;
       this.init();

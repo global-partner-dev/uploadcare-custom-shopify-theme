@@ -75,6 +75,7 @@
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <div class="page-width">
+    {% if product.title != 'Order Photo Frame' %}
     <!-- Photo Selection Modal -->
 <div class="photo-selection-modal" id="photo-selection-modal">
   <div class="modal-overlay"></div>
@@ -85,7 +86,7 @@
     
     <div class="modal-body">
       <div class="modal-layout">
-
+      
         <!-- Center - Upload Area -->
         <div class="upload-area">
           <div class="upload-content">
@@ -120,8 +121,10 @@
 
                     // Toggle modal Add to Cart when exactly 9 images are uploaded
                     const modalAddBtn = document.getElementById('modal-add-to-cart');
+                    // Required photos derived server-side to keep logic in sync
+                    const required = ({{ product.title | json }} === 'NFT Chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
                     if (modalAddBtn) {
-                      const isComplete = urls.length === 9;
+                      const isComplete = urls.length === required;
                       modalAddBtn.disabled = !isComplete;
                       if (isComplete) {
                         modalAddBtn.classList.remove("disabled");
@@ -179,7 +182,8 @@
                   const modalAddBtn = document.getElementById('modal-add-to-cart');
                   if (modalAddBtn) {
                     modalAddBtn.addEventListener('click', () => {
-                      if (uploadedUrls.length !== 9) return;
+                      const required = ({{ product.title | json }} === 'NFT Chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
+                      if (uploadedUrls.length !== required) return;
 
                       const form = document.querySelector('[data-type="add-to-cart-form"]');
                       const variantInput = form && form.querySelector('.product-variant-id');
@@ -207,14 +211,25 @@
                   }
                 });
               </script>
+              {%- liquid
+                assign required_photos = 9
+                if product.title == 'NFT Chip'
+                  assign required_photos = 1
+                elsif product.title == 'Order Photo Frame'
+                  assign required_photos = 0
+                endif
+              -%}
+              <script>
+                window.requiredPhotos = {{ required_photos }};
+              </script>
               <uc-config
                 ctx-name="modal-photo-uploader"
                 source-list="local, camera, facebook, gdrive, dropbox, instagram"
                 files-view-mode="grid"
                 pubkey="c42b2d4efe346e09fc68"
                 multiple="true"
-                multiple-max="9"
-                multiple-min="9"
+                multiple-max="{{ required_photos | at_least: 1 }}"
+                multiple-min="{{ required_photos | at_least: 1 }}"
                 crop="1:1"
                 preview-step="true"
                 tabs="file camera facebook gdrive dropbox instagram"
@@ -258,7 +273,8 @@
       </div>
     </div>
   </div>
-</div>
+ </div>
+{% endif %}
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
@@ -672,7 +688,7 @@
                     endif
                   endfor
                 -%}
-                {%- if has_photo_upload -%}
+                {%- if has_photo_upload and product.title != 'Order Photo Frame' -%}
                   {%- render 'buy-buttons-photo',
                     block: block,
                     product: product,
@@ -690,11 +706,13 @@
                   -%}
                 {%- endif -%}
               {%- when 'photo_upload' -%}
-                {%- render 'photo-upload-section',
-                  block: block,
-                  product: product,
-                  section_id: section.id
-                -%}
+                {%- unless product.title == 'Order Photo Frame' -%}
+                  {%- render 'photo-upload-section',
+                    block: block,
+                    product: product,
+                    section_id: section.id
+                  -%}
+                {%- endunless -%}
               {%- when 'rating' -%}
                 {%- if product.metafields.reviews.rating.value != blank -%}
                   <div class="rating-wrapper">
