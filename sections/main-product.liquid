@@ -225,7 +225,9 @@
               <uc-config
                 ctx-name="modal-photo-uploader"
                 source-list="local, camera, facebook, gdrive, dropbox, instagram"
+                {%- unless product.title == 'NFT chip' -%}
                 files-view-mode="grid"
+                {%- endunless -%}
                 pubkey="c42b2d4efe346e09fc68"
                 multiple="true"
                 multiple-max="{{ required_photos | at_least: 1 }}"
