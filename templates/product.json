@@ -25,10 +25,6 @@
                         "swatch_shape": "circle"
                     }
                 },
-                "quantity_selector": {
-                    "type": "quantity_selector",
-                    "settings": {}
-                },
                 "photo_upload": {
                     "type": "photo_upload",
                     "settings": {
@@ -60,7 +56,6 @@
                 "title",
                 "price",
                 "variant_picker",
-                "quantity_selector",
                 "photo_upload",
                 "buy_buttons",
                 "description",
