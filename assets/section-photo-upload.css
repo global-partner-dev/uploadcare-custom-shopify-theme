@@ -123,6 +123,19 @@
   min-height: 80px;
 }
 
+/* Center single audio file */
+.drop-grid:has(.audio-file:only-child) {
+  grid-template-columns: 1fr;
+  justify-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.drop-grid:has(.audio-file:only-child) .audio-file {
+  width: 100%;
+  max-width: 250px;
+}
+
 .audio-file-info {
   text-align: center;
   color: #333;
