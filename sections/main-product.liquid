@@ -259,7 +259,11 @@
               </script>
               <uc-config
                 ctx-name="modal-photo-uploader"
-                source-list="local, camera, facebook, gdrive, dropbox, instagram"
+                {%- if product.title == 'NFT chip' -%}
+                  source-list="local, facebook, gdrive, dropbox, instagram"
+                {%- else -%}
+                  source-list="local, camera, facebook, gdrive, dropbox, instagram"
+                {%- endif -%}
                 {%- unless product.title == 'NFT chip' -%}
                 files-view-mode="grid"
                 {%- endunless -%}
@@ -267,11 +271,13 @@
                 multiple="true"
                 multiple-max="{{ required_photos | at_least: 1 }}"
                 multiple-min="{{ required_photos | at_least: 1 }}"
-                crop="1:1"
+                {%- unless product.title == 'NFT chip' -%}
+                img-only="true"
+                {%- endunless -%}
+                crop-preset="1:1"
+                crop-multiple="false"
                 preview-step="true"
                 tabs="file camera facebook gdrive dropbox instagram"
-                secure-signature=""
-                secure-expire=""
                 system-dialog="true"
                 input-accept-types="image/*"
               ></uc-config>

@@ -127,13 +127,13 @@
 .drop-grid:has(.audio-file:only-child) {
   grid-template-columns: 1fr;
   justify-items: center;
-  max-width: 300px;
+  max-width: 350px;
   margin: 0 auto;
 }
 
 .drop-grid:has(.audio-file:only-child) .audio-file {
   width: 100%;
-  max-width: 250px;
+  max-width: 350px;
 }
 
 .audio-file-info {
@@ -142,13 +142,13 @@
 }
 
 .audio-icon {
-  font-size: 2rem;
+  font-size: 4rem;
   margin-bottom: 0.5rem;
 }
 
 .file-name {
   font-weight: 600;
-  font-size: 0.9rem;
+  font-size: 1.5rem;
   margin-bottom: 0.25rem;
 }
 
