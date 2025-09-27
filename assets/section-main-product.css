@@ -2,6 +2,11 @@ product-info {
   display: block;
 }
 
+/* Hide Shop Pay installment payment option */
+.installment {
+  display: none !important;
+}
+
 .product {
   margin: 0;
 }
