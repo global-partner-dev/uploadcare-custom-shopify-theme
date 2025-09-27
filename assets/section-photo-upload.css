@@ -27,11 +27,11 @@
   margin: 0 auto;
 }
 
-.photo-upload-content {
-  /* display: grid;
+/* .photo-upload-content {
+  display: grid;
   grid-template-columns: 1fr;
-  align-items: start; */
-}
+  align-items: start;
+} */
 
 /* Select Pictures Button Styling */
 .select-pictures-container {
@@ -42,18 +42,18 @@
 }
 
 .select-pictures-btn {
-  background-color: #2bdd4f; /* lavender accent */
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
   color: #fff;
   border: none;
   border-radius: 25px;
-  padding: 1.3rem 2rem;
+  padding: 1.5rem 2.5rem;
   font-size: clamp(1rem, 2vw, 1.5rem); /* scales text based on screen width */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+  box-shadow: 0 6px 20px rgba(107, 115, 255, 0.35);
   width: 100%;
   max-width: 300px; /* prevents button from stretching too much */
   min-width: 200px;
@@ -61,14 +61,14 @@
 
 /* Hover & Active States */
 .select-pictures-btn:hover {
-  background: rgb(137, 84, 250);
+  background: linear-gradient(135deg, #5a67d8 0%, #0008e6 100%);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(255, 71, 87, 0.4);
+  box-shadow: 0 8px 25px rgba(107, 115, 255, 0.45);
 }
 
 .select-pictures-btn:active {
   transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(255, 71, 87, 0.3);
+  box-shadow: 0 4px 15px rgba(107, 115, 255, 0.3);
 }
 
 /* Media Queries */
@@ -82,9 +82,9 @@
 
 @media (max-width: 480px) {
   .select-pictures-btn {
-    padding: 1rem 1.2rem;
+    padding: 1.2rem 1.5rem;
     font-size: 1.2rem;
-    max-width: 200px;
+    max-width: 250px;
   }
 }
 

@@ -3,9 +3,6 @@ product-info {
 }
 
 /* Hide Shop Pay installment payment option */
-.installment {
-  display: none !important;
-}
 
 .product {
   margin: 0;
