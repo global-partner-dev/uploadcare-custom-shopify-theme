@@ -100,6 +100,7 @@
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   border: 2px dashed rgba(var(--color-foreground), 0.2);
   transition: border-color 0.3s ease;
+  position: relative;
 }
 
 /* 3x3 placeholder grid shown after Done */
@@ -193,6 +194,54 @@
 
 .uploadcare-widget-container:hover {
   border-color: rgba(var(--color-foreground), 0.4);
+}
+
+/* Modern custom trigger */
+.uc-custom-trigger {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  color: #fff;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.9rem 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  box-shadow: 0 16px 40px rgba(0, 13, 255, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.uc-custom-trigger:hover {
+  transform: translate(-50%, -51%);
+  box-shadow: 0 22px 48px rgba(0, 13, 255, 0.45);
+}
+
+.uc-custom-trigger:active {
+  transform: translate(-50%, -49%);
+}
+
+.uc-trigger-icon {
+  display: inline-flex;
+  width: 1.25rem;
+  height: 1.25rem;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.2);
+  border-radius: 9999px;
+}
+
+@media (max-width: 768px) {
+  .uc-custom-trigger {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.95rem;
+  }
 }
 
 .photo-uploader-widget {

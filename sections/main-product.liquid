@@ -93,6 +93,10 @@
             {% comment %} <h3 class="upload-title">drag & drop any files</h3> {% endcomment %}
             <div class="drop-grid" id="drop-grid" style="display:none;"></div>
             <div class="uploadcare-widget-container">
+              <button class="uc-custom-trigger" type="button" id="uc-custom-trigger">
+                <span class="uc-trigger-icon">⇧</span>
+                <span class="uc-trigger-text">Upload files</span>
+              </button>
               <link
                 rel="stylesheet"
                 href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.css"
@@ -156,6 +160,7 @@
 
                 // Also wire to the uploader element events as a fallback
                 const uploaderEl = document.querySelector('uc-file-uploader-regular[ctx-name="modal-photo-uploader"]') || document.querySelector('uc-file-uploader-regular');
+                const customTrigger = document.getElementById('uc-custom-trigger');
                 const propagate = (urls) => {
                   uploadedUrls = (urls || []).filter(Boolean).slice(0, 9);
                   const grid = document.getElementById('drop-grid');
@@ -191,6 +196,11 @@
                 };
 
                 if (uploaderEl) {
+                  if (customTrigger) {
+                    customTrigger.addEventListener('click', () => {
+                      try { uploaderEl.click(); } catch(_) {}
+                    });
+                  }
                   uploaderEl.addEventListener('done', (ev) => {
                     try {
                       const files = ev?.detail || [];
