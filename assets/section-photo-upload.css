@@ -808,21 +808,21 @@
 
 @media screen and (max-width: 990px) {
   .upsell-card {
-    grid-template-columns: 80px 1fr;
+    grid-template-columns: 150px 1fr;
     padding: 0.6rem;
   }
   .upsell-image-link {
-    width: 80px;
-    height: 80px;
+    width: 150px;
+    height: 150px;
     border-radius: 8px;
   }
   .upsell-title {
-    font-size: 0.95rem;
+    font-size: 1.8rem;
   }
   .upsell-button {
-    width: fit-content;
+    width: 65%;
     padding: 0.55rem 0.9rem;
-    font-size: 0.88rem;
+    font-size: 1.3rem;
   }
 }
 
@@ -840,6 +840,9 @@
   .upsell-image-link {
     width: 72px;
     height: 72px;
+  }
+  .upsell-title {
+    font-size: 1rem;
   }
   .upsell-button {
     width: 100%;
