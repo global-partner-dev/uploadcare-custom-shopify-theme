@@ -726,7 +726,7 @@
 /* Upsell cards */
 .upsell-card {
   display: grid;
-  grid-template-columns: 150px 1fr;
+  grid-template-columns: 120px 1fr;
   height: auto;
   gap: 0.75rem;
   align-items: center;
@@ -734,12 +734,14 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 0.75rem;
+  margin-bottom: 10px;
+  box-shadow: 3px 4px 10px 1px #0000001a;
 }
 
 .upsell-image-link {
   display: block;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
   border-radius: 10px;
   overflow: hidden;
   background: #f3f4f6;
@@ -767,40 +769,40 @@
 
 .upsell-description {
   font-size: 1.3rem;
-  margin: 0;
+  margin: 0px !important;
 }
-
+.upsell-description>p{
+  margin: 0px;
+}
 .upsell-button {
   display: inline-block;
-  background-color: #079251c9;
-  color: #fff;
+  color: #208cff;
   border: none;
   border-radius: 8px;
-  padding: 0.6rem 1rem;
   text-decoration: none;
   font-size: 1.5rem;
   text-align: center;
   width: 65%;
   font-weight: 700;
   letter-spacing: 0.3px;
-  box-shadow: 0 6px 16px rgba(0, 13, 255, 0.25);
   transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .upsell-button:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(0, 13, 255, 0.32);
+  color: #0070e7;
+  font-size: 1.7rem;
   opacity: 0.95;
 }
 
 @media screen and (max-width: 990px) {
   .upsell-card {
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 130px 1fr;
     padding: 0.6rem;
   }
   .upsell-image-link {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
     border-radius: 8px;
   }
   .upsell-title {
@@ -819,12 +821,12 @@
     gap: 0.75rem;
   }
   .upsell-card {
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 130px 1fr;
     padding: 0.5rem;
   }
   .upsell-image-link {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
   }
   .upsell-title {
     font-size: 1.6rem;
@@ -879,6 +881,13 @@
 .preview-footer {
   padding: 1rem;
   border-top: 1px solid #e0e0e0;
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
 }
 
 .selection-count {
@@ -895,7 +904,7 @@
   border-radius: 8px;
   padding: 1.5rem 1rem;
   font-size: 1.5rem;
-  margin: 3px 20px 3px 0px;
+  margin: 3px 20px 3px 17px;
   font-weight: 600;
   text-transform: uppercase;
   border: none;
@@ -927,7 +936,7 @@
   border-radius: 8px;
   padding: 1.5rem 1rem;
   font-size: 1.5rem;
-  margin: 3px 20px 3px 0px;
+  margin: 3px 20px 3px 17px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
