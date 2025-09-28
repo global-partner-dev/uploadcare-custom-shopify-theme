@@ -205,7 +205,6 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
   color: #fff;
   border: none;
   border-radius: 9999px;
@@ -214,13 +213,11 @@
   font-weight: 700;
   letter-spacing: 0.3px;
   cursor: pointer;
-  box-shadow: 0 16px 40px rgba(0, 13, 255, 0.35);
   transition: transform 0.12s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .uc-custom-trigger:hover {
   transform: translate(-50%, -51%);
-  box-shadow: 0 22px 48px rgba(0, 13, 255, 0.45);
 }
 
 .uc-custom-trigger:active {
@@ -624,20 +621,6 @@
   border-bottom: 1px solid #e0e0e0;
 }
 
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 2rem;
-  color: #666;
-  cursor: pointer;
-  padding: 0.5rem;
-  line-height: 1;
-  transition: color 0.3s ease;
-}
-
-.modal-close:hover {
-  color: #333;
-}
 
 .modal-body {
   flex: 1;
@@ -820,7 +803,7 @@
     font-size: 1.8rem;
   }
   .upsell-button {
-    width: 65%;
+    width: 60%;
     padding: 0.55rem 0.9rem;
     font-size: 1.3rem;
   }
@@ -845,8 +828,9 @@
     font-size: 1rem;
   }
   .upsell-button {
-    width: 100%;
-    text-align: center;
+    width: 75%;
+    padding: 0.55rem 0.9rem;
+    font-size: 1rem;
   }
 }
 
@@ -873,6 +857,19 @@
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.modal-close-button {
+  font-size: 25px;
+  color: white;
+  width: 35px;
+  height: 35px;
+  text-align: center;
+  border-radius: 25px;
+  background: transparent;
+  background-color: #d9295af2;
+  border: none;
+  cursor: pointer;
 }
 
 .preview-thumbnail:hover .remove-thumbnail {

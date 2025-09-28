@@ -81,7 +81,7 @@
   <div class="modal-overlay"></div>
   <div class="modal-content">
     <div class="modal-header">
-      <button class="modal-close" id="modal-close">&times;</button>
+      <button class="modal-close-button" id="modal-close">&times;</button>
     </div>
     
     <div class="modal-body">
@@ -93,10 +93,6 @@
             {% comment %} <h3 class="upload-title">drag & drop any files</h3> {% endcomment %}
             <div class="drop-grid" id="drop-grid" style="display:none;"></div>
             <div class="uploadcare-widget-container">
-              <button class="uc-custom-trigger" type="button" id="uc-custom-trigger">
-                <span class="uc-trigger-icon">⇧</span>
-                <span class="uc-trigger-text">Upload files</span>
-              </button>
               <link
                 rel="stylesheet"
                 href="https://cdn.jsdelivr.net/npm/@uploadcare/file-uploader@1/web/uc-file-uploader-regular.min.css"
@@ -305,8 +301,8 @@
         <!-- Right Sidebar - Upsell Products -->
         <div class="selection-preview-sidebar">
           <div class="preview-header">
-            <button class="preview-close" id="preview-close">&times;</button>
-            <h3>Try Special Product!</h3>
+            <h3 style="font-weight: bold;">Customers Also Love</h3>
+            <h3>Don’t Miss This Favorite</h3>
           </div>
           
           <div class="preview-grid" id="preview-grid">
