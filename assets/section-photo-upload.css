@@ -800,7 +800,7 @@
     border-radius: 8px;
   }
   .upsell-title {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
   .upsell-button {
     width: 60%;
@@ -811,24 +811,22 @@
 
 @media screen and (max-width: 480px) {
   .preview-grid {
-    flex: 1;
-    display: grid;
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
   .upsell-card {
-    grid-template-columns: 72px 1fr;
+    grid-template-columns: 150px 1fr;
     padding: 0.5rem;
   }
   .upsell-image-link {
-    width: 72px;
-    height: 72px;
+    width: 150px;
+    height: 150px;
   }
   .upsell-title {
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
   .upsell-button {
-    width: 75%;
+    width: 60%;
     padding: 0.55rem 0.9rem;
     font-size: 1rem;
   }
