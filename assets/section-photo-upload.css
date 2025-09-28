@@ -811,7 +811,7 @@
   .upsell-button {
     width: 60%;
     padding: 0.55rem 0.9rem;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -834,7 +834,7 @@
   .upsell-button {
     width: 60%;
     padding: 0.8rem 0.9rem;
-    font-size: 1rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -968,6 +968,10 @@
   }
   
   .selection-preview-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     border-left: none;
     border-top: 1px solid #e0e0e0;
     max-height: 45vh;
