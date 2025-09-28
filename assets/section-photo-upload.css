@@ -772,6 +772,8 @@
 .upsell-info {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 0.5rem;
 }
 
@@ -783,13 +785,13 @@
 
 .upsell-button {
   display: inline-block;
-  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  background: linear-gradient(128deg, #91e7ce, #6dc73e);
   color: #fff;
   border: none;
   border-radius: 9999px;
   padding: 0.6rem 1rem;
   text-decoration: none;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   text-align: center;
   width: 65%;
   font-weight: 700;
