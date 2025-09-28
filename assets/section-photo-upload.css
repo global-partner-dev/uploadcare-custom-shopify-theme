@@ -476,9 +476,18 @@
     font-size: 1.75rem;
   }
   
-  .uploadcare-widget-container,
   .photo-preview-container {
     padding: 1rem;
+  }
+
+  .uploadcare-widget-container {
+    padding: 1rem;
+    margin: 0;
+  }
+
+  .preview-header {
+    display: none;
+    height: 0px !important;
   }
   
   .photo-grid {
@@ -606,12 +615,12 @@
   background: white;
   border-radius: 0;
   width: 100%;
-  height: 100vh; /* cap to viewport height */
+  height: 100vh;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
   box-shadow: none;
-  overflow: hidden; /* contain inner scrolls to body/sidebar */
+  overflow: visible; /* contain inner scrolls to body/sidebar */
 }
 
 .modal-header {
@@ -810,7 +819,6 @@
   }
   .upsell-button {
     width: 60%;
-    padding: 0.55rem 0.9rem;
     font-size: 1.5rem;
   }
 }
@@ -819,6 +827,7 @@
   .preview-grid {
     grid-template-columns: 1fr;
     gap: 0.75rem;
+    height: 180px;
   }
   .upsell-card {
     grid-template-columns: 130px 1fr;
@@ -833,8 +842,14 @@
   }
   .upsell-button {
     width: 60%;
-    padding: 0.8rem 0.9rem;
     font-size: 1.5rem;
+  }
+  .modal-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
 }
 
@@ -995,5 +1010,11 @@
   
   .upload-title {
     font-size: 1.25rem;
+  }
+  .add-to-cart-btn {
+    width: 95%;
+  }
+  .cancel-to-cart-btn {
+    width: 95%;
   }
 }
