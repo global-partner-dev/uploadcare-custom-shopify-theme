@@ -301,8 +301,8 @@
         <!-- Right Sidebar - Upsell Products -->
         <div class="selection-preview-sidebar">
           <div class="preview-header">
-            <h3 style="font-weight: bold;">Customers Also Love</h3>
-            <h3>Don’t Miss This Favorite</h3>
+            <h3 style="font-weight: bold; margin-bottom: 0; font-size: 21px">Customers Also Love</h3>
+            <h3 style="margin-top: 0; font-size: 16px">Don’t Miss This Favorite</h3>
           </div>
           
           <div class="preview-grid" id="preview-grid">
@@ -317,6 +317,7 @@
                   </a>
                   <div class="upsell-info">
                     <div class="upsell-title">{{ nft_chip.title }}</div>
+                    <div class="upsell-description">{{ nft_chip.description }}</div>
                     <a class="upsell-button" href="{{ nft_chip.url }}">Try it</a>
                   </div>
                 </div>
@@ -329,6 +330,7 @@
                   </a>
                   <div class="upsell-info">
                     <div class="upsell-title">{{ order_photo_frame.title }}</div>
+                    <div class="upsell-description">{{ order_photo_frame.description }}</div>
                     <a class="upsell-button" href="{{ order_photo_frame.url }}">Try it</a>
                   </div>
                 </div>

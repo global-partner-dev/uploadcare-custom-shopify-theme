@@ -663,7 +663,7 @@
 
 /* Selection Preview Sidebar */
 .selection-preview-sidebar {
-  background: #f8f9fa;
+  background: #ffffff;
   border-left: 1px solid #e0e0e0;
   display: flex;
   flex-direction: column;
@@ -727,7 +727,7 @@
 .upsell-card {
   display: grid;
   grid-template-columns: 150px 1fr;
-  height: 170px;
+  height: auto;
   gap: 0.75rem;
   align-items: center;
   background: #fff;
@@ -757,7 +757,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
 }
 
 .upsell-title {
@@ -766,12 +765,17 @@
   color: #222;
 }
 
+.upsell-description {
+  font-size: 1.3rem;
+  margin: 0;
+}
+
 .upsell-button {
   display: inline-block;
-  background: linear-gradient(128deg, #91e7ce, #6dc73e);
+  background-color: #079251c9;
   color: #fff;
   border: none;
-  border-radius: 9999px;
+  border-radius: 8px;
   padding: 0.6rem 1rem;
   text-decoration: none;
   font-size: 1.5rem;
@@ -827,7 +831,7 @@
   }
   .upsell-button {
     width: 60%;
-    padding: 0.55rem 0.9rem;
+    padding: 0.8rem 0.9rem;
     font-size: 1rem;
   }
 }
@@ -859,13 +863,11 @@
 
 .modal-close-button {
   font-size: 25px;
-  color: white;
   width: 35px;
   height: 35px;
   text-align: center;
   border-radius: 25px;
   background: transparent;
-  background-color: #d9295af2;
   border: none;
   cursor: pointer;
 }
@@ -888,28 +890,29 @@
 
 .add-to-cart-btn {
   width: 100%;
-  background-color: #079251c9; /* charcoal */
-  color: #FFFFFF;
-  border: none;
-  border-radius: 25px;
+  background-color: #00000012; /* charcoal */
+  color: rgb(0 0 0 / 75%);
+  border-radius: 8px;
   padding: 1.5rem 1rem;
   font-size: 1.5rem;
   margin: 3px 20px 3px 0px;
   font-weight: 600;
   text-transform: uppercase;
+  border: none;
   letter-spacing: 0.5px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .add-to-cart-btn:hover:not(:disabled) {
-  background: #08d174c9;
+  background: #0000003d;
   transform: translateY(-1px);
 }
 
 .add-to-cart-btn:disabled,
 .add-to-cart-btn.disabled {
-  background: #08d174c9;
+  background: #0000000f;
+  color: #000000ab;
   cursor: not-allowed;
   transform: none;
   opacity: 0.8; /* optional: gives a "faded" disabled look */
@@ -918,10 +921,10 @@
 
 .cancel-to-cart-btn {
   width: 100%;
-  background-color: #8de6ed4a; /* muted gray */
-  color: #2B2B2B;
+  background-color: #0000000f; /* muted gray */
+  color: rgb(0 0 0 / 39%);
   border: none;
-  border-radius: 25px;
+  border-radius: 8px;
   padding: 1.5rem 1rem;
   font-size: 1.5rem;
   margin: 3px 20px 3px 0px;
@@ -933,7 +936,7 @@
 }
 
 .cancel-to-cart-btn:hover {
-  background:#7fe5ec4a;
+  background: #0000003d;
   transform: translateY(-1px);
 }
 
