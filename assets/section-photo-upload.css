@@ -106,7 +106,7 @@
 /* 3x3 placeholder grid shown after Done */
 .drop-grid {
   display: grid;
-  grid-template-columns: repeat(3, 16%); /* 3 equal columns */
+  grid-template-columns: repeat(3, 20%); /* 3 equal columns */
   gap: 5px;
   margin-bottom: 5px;
   justify-content: center;
@@ -614,7 +614,8 @@
   position: relative;
   background: white;
   border-radius: 0;
-  width: 100%;
+  width: 1200px;
+  border: 1px #efe7e7 solid;
   height: 100vh;
   max-height: 100vh;
   display: flex;
@@ -639,7 +640,7 @@
 
 .modal-layout {
   display: grid;
-  grid-template-columns: 1fr 400px;
+  grid-template-columns: 1fr 360px;
   height: 100%;
 }
 
@@ -830,17 +831,60 @@
   }
   .preview-grid {
     height: 260px !important;
+    width: 90%;
+  }
+  .preview-footer {
+    width: 390px !important;
+  }
+  .drop-grid {
+    grid-template-columns: repeat(3, 114px);
+    gap: 6px;
+  }
+  .drop-grid .cell {
+    width: 100%;
+    height: 100%;
   }
 }
 
 @media  screen and (max-height: 700px) and (max-width: 480px) {
   .preview-grid {
-    height: 130px !important;
+    height: 100px !important;
+    width: 90%;
+    padding-top: 0px !important;
   }
   .upload-area {
     position: fixed;
     top: 65px;
     height: 55%;
+  }
+  .preview-footer {
+    width: 360px !important;
+  }
+  .drop-grid {
+    grid-template-columns: repeat(3, 100px);
+    gap: 5px;
+  }
+  .drop-grid .cell {
+    width: 100%;
+    height: 100%;
+  }
+  .uploadcare-widget-container {
+    padding: 5px 2rem;
+  }
+  .upsell-card {
+    grid-template-columns: 84px 1fr !important;
+    padding: 0.4rem;
+  }
+  .upsell-image-link {
+    width: 84px !important;
+    height: 84px !important;
+  }
+  .upsell-title {
+    font-size: 1.2rem !important; 
+  }
+  .upsell-description {
+    font-size: 1.1rem !important;
+    margin: 0px !important;
   }
 }
 
@@ -925,7 +969,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 400px;
+  width: 360px;
 }
 
 .selection-count {
