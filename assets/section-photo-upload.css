@@ -822,6 +822,27 @@
     font-size: 1.5rem;
   }
 }
+@media  screen and (max-height: 900px) and (max-width: 480px) {
+  .upload-area {
+    position: fixed;
+    top: 160px;
+    height: 25%;
+  }
+  .preview-grid {
+    height: 260px !important;
+  }
+}
+
+@media  screen and (max-height: 700px) and (max-width: 480px) {
+  .preview-grid {
+    height: 130px !important;
+  }
+  .upload-area {
+    position: fixed;
+    top: 65px;
+    height: 55%;
+  }
+}
 
 @media screen and (max-width: 480px) {
   .preview-grid {
