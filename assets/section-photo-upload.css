@@ -42,7 +42,7 @@
 }
 
 .select-pictures-btn {
-  background: linear-gradient(135deg, #6b73ff 0%, #000dff 100%);
+  background-color: #f1303ba6;
   color: #fff;
   border: none;
   border-radius: 25px;
@@ -61,7 +61,7 @@
 
 /* Hover & Active States */
 .select-pictures-btn:hover {
-  background: linear-gradient(135deg, #5a67d8 0%, #0008e6 100%);
+  background-color: #f1303ab7;
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(107, 115, 255, 0.45);
 }
