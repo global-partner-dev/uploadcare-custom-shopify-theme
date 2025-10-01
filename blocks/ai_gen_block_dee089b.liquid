@@ -11,6 +11,8 @@
 {% enddoc %}
 {% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
 
+{{ 'section-photo-upload.css' | asset_url | stylesheet_tag }}
+
 {% style %}
   .ai-photo-upload-{{ ai_gen_id }} {
     display: flex;
@@ -111,116 +113,43 @@
       </p>
     {% endif %}
 
-    <button
-      class="ai-photo-upload-button-{{ ai_gen_id }}"
-      type="button"
-      aria-label="Select pictures to upload"
-    >
-      <svg
-        class="ai-photo-upload-button-icon-{{ ai_gen_id }}"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-      >
-        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-        <circle cx="9" cy="9" r="2"/>
-        <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-      </svg>
-      {{ block.settings.button_text }}
-    </button>
-
-    <input
-      type="file"
-      class="ai-photo-upload-input-{{ ai_gen_id }}"
-      multiple
-      accept="image/*"
-      style="display: none;"
-      aria-label="Select image files"
-    >
+    <div class="select-pictures-container">
+      <button class="select-pictures-btn" id="select-pictures-btn" type="button" aria-label="Select pictures to upload">
+        {{ block.settings.button_text }}
+      </button>
+    </div>
   </div>
 </photo-upload-{{ ai_gen_id }}>
 
 <script>
   (function() {
-    class PhotoUpload{{ ai_gen_id }} extends HTMLElement {
-      constructor() {
-        super();
-      }
-
-      connectedCallback() {
-        this.button = this.querySelector('.ai-photo-upload-button-{{ ai_gen_id }}');
-        this.fileInput = this.querySelector('.ai-photo-upload-input-{{ ai_gen_id }}');
-        
-        this.setupEventListeners();
-      }
-
-      setupEventListeners() {
-        this.button.addEventListener('click', () => {
-          this.fileInput.click();
-        });
-
-        this.fileInput.addEventListener('change', (event) => {
-          const files = event.target.files;
-          if (files.length > 0) {
-            this.handleFileSelection(files);
-          }
-        });
-      }
-
-      handleFileSelection(files) {
-        const fileCount = files.length;
-        const fileText = fileCount === 1 ? 'file' : 'files';
-        
-        this.button.innerHTML = `
-          <svg
-            class="ai-photo-upload-button-icon-{{ ai_gen_id }}"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="20,6 9,17 4,12"/>
-          </svg>
-          ${fileCount} ${fileText} selected
-        `;
-
-        setTimeout(() => {
-          this.button.innerHTML = `
-            <svg
-              class="ai-photo-upload-button-icon-{{ ai_gen_id }}"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              <circle cx="9" cy="9" r="2"/>
-              <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
-            </svg>
-            {{ block.settings.button_text }}
-          `;
-        }, 2000);
-      }
-    }
-
-    customElements.define('photo-upload-{{ ai_gen_id }}', PhotoUpload{{ ai_gen_id }});
+    document.addEventListener('DOMContentLoaded', function() {
+      var root = document.querySelector('photo-upload-{{ ai_gen_id }}');
+      if (!root) return;
+      var btn = root.querySelector('#select-pictures-btn');
+      if (!btn) return;
+      if (btn._aiWired) return; // avoid duplicate listeners
+      btn._aiWired = true;
+      btn.addEventListener('click', function() {
+        if (window.photoUploadManager && typeof window.photoUploadManager.openModal === 'function') {
+          window.photoUploadManager.openModal();
+          return;
+        }
+        var modal = document.getElementById('photo-selection-modal');
+        if (modal) {
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        }
+      });
+    });
   })();
-</script>
+  </script>
+
 
 {% schema %}
 {
   "name": "Photo upload",
-  "tag": null,
+  "tag": "section",
   "settings": [
     {
       "type": "header",
