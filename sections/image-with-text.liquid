@@ -85,19 +85,14 @@
                     {{ block.settings.text }}
                   </div>
                 {%- when 'button' -%}
-                  {%- if block.settings.button_label != blank -%}
-                    <a
-                      {% if block.settings.button_link == blank %}
-                        role="link" aria-disabled="true"
-                      {% else %}
-                        href="{{ block.settings.button_link }}"
-                      {% endif %}
-                      class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
-                      {{ block.shopify_attributes }}
-                    >
-                      {{ block.settings.button_label | escape }}
-                    </a>
-                  {%- endif -%}
+                  <button
+                    type="button"
+                    class="button{% if block.settings.button_style_secondary %} button--secondary{% else %} button--primary{% endif %}"
+                    onclick="document.getElementById('photo-selection-modal').style.display='flex'"
+                    {{ block.shopify_attributes }}
+                  >
+                    SELECT PICTURES
+                  </button>
               {%- endcase -%}
             {%- endfor -%}
           </div>
@@ -447,16 +442,8 @@
       "limit": 1,
       "settings": [
         {
-          "type": "text",
-          "id": "button_label",
-          "default": "t:sections.image-with-text.blocks.button.settings.button_label.default",
-          "label": "t:sections.image-with-text.blocks.button.settings.button_label.label",
-          "info": "t:sections.image-with-text.blocks.button.settings.button_label.info"
-        },
-        {
-          "type": "url",
-          "id": "button_link",
-          "label": "t:sections.image-with-text.blocks.button.settings.button_link.label"
+          "type": "paragraph",
+          "content": "This button will display 'SELECT PICTURES' and open the photo selection modal."
         },
         {
           "type": "checkbox",

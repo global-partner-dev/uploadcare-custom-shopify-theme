@@ -35,10 +35,10 @@
         <h2 class="title inline-richtext {{ section.settings.heading_size }}">
           {{ section.settings.title }}
         </h2>
-        {%- if section.settings.button_label != blank and show_mobile_slider -%}
-          <a href="{{ section.settings.button_link }}" class="link underlined-link large-up-hide">
-            {{- section.settings.button_label | escape -}}
-          </a>
+        {%- if show_mobile_slider -%}
+          <button type="button" class="link underlined-link large-up-hide" onclick="document.getElementById('photo-selection-modal').style.display='flex'">
+            SELECT PICTURES
+          </button>
         {%- endif -%}
       </div>
     {%- endunless -%}
@@ -174,18 +174,13 @@
       {%- endif -%}
     </slider-component>
     <div class="center{% if show_mobile_slider %} small-hide medium-hide{% endif %}">
-      {%- if section.settings.button_label != blank -%}
-        <a
-          class="button button--primary"
-          {% if section.settings.button_link == blank %}
-            role="link" aria-disabled="true"
-          {% else %}
-            href="{{ section.settings.button_link }}"
-          {% endif %}
-        >
-          {{ section.settings.button_label | escape }}
-        </a>
-      {%- endif -%}
+      <button
+        type="button"
+        class="button button--primary"
+        onclick="document.getElementById('photo-selection-modal').style.display='flex'"
+      >
+        SELECT PICTURES
+      </button>
     </div>
   </div>
 </div>
@@ -284,18 +279,10 @@
     {
       "type": "header",
       "content": "t:sections.multicolumn.settings.header_button.content"
-    },    
-    {
-      "type": "text",
-      "id": "button_label",
-      "default": "t:sections.multicolumn.settings.button_label.default",
-      "label": "t:sections.multicolumn.settings.button_label.label", 
-      "info": "t:sections.multicolumn.settings.button_label.info"
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "t:sections.multicolumn.settings.button_link.label"
+      "type": "paragraph",
+      "content": "The button will display 'SELECT PICTURES' and open the photo selection modal."
     },    
     {
       "type": "header",
