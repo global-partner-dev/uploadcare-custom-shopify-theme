@@ -114,6 +114,12 @@
                     const grid = document.getElementById('drop-grid');
                     if (grid && urls.length) {
                       grid.style.display = 'grid';
+                      // Toggle a visual complete state for 9 images
+                      if (urls.length === 9) {
+                        grid.classList.add('complete');
+                      } else {
+                        grid.classList.remove('complete');
+                      }
                       const isAudio = {{ product.title | json }} === 'NFC chip';
                       if (isAudio) {
                         // Show file list for audio
@@ -160,8 +166,14 @@
                 const propagate = (urls) => {
                   uploadedUrls = (urls || []).filter(Boolean).slice(0, 9);
                   const grid = document.getElementById('drop-grid');
-                  if (grid && uploadedUrls.length) {
+                    if (grid && uploadedUrls.length) {
                     grid.style.display = 'grid';
+                      // Toggle a visual complete state for 9 images
+                      if (uploadedUrls.length === 9) {
+                        grid.classList.add('complete');
+                      } else {
+                        grid.classList.remove('complete');
+                      }
                     const isAudio = {{ product.title | json }} === 'NFC chip';
                     if (isAudio) {
                       // Show file list for audio
