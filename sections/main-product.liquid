@@ -114,7 +114,7 @@
                     const grid = document.getElementById('drop-grid');
                     if (grid && urls.length) {
                       grid.style.display = 'grid';
-                      const isAudio = {{ product.title | json }} === 'NFT chip';
+                      const isAudio = {{ product.title | json }} === 'NFC chip';
                       if (isAudio) {
                         // Show file list for audio
                         grid.innerHTML = urls
@@ -137,7 +137,7 @@
                     // Toggle modal Add to Cart when exactly 9 images are uploaded
                     const modalAddBtn = document.getElementById('modal-add-to-cart');
                     // Required photos derived server-side to keep logic in sync
-                    const required = ({{ product.title | json }} === 'NFT chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
+                    const required = ({{ product.title | json }} === 'NFC chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
                     if (modalAddBtn) {
                       const isComplete = urls.length === required;
                       modalAddBtn.disabled = !isComplete;
@@ -162,7 +162,7 @@
                   const grid = document.getElementById('drop-grid');
                   if (grid && uploadedUrls.length) {
                     grid.style.display = 'grid';
-                    const isAudio = {{ product.title | json }} === 'NFT chip';
+                    const isAudio = {{ product.title | json }} === 'NFC chip';
                     if (isAudio) {
                       // Show file list for audio
                       grid.innerHTML = uploadedUrls
@@ -218,7 +218,7 @@
                   const modalAddBtn = document.getElementById('modal-add-to-cart');
                   if (modalAddBtn) {
                     modalAddBtn.addEventListener('click', () => {
-                      const required = ({{ product.title | json }} === 'NFT chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
+                      const required = ({{ product.title | json }} === 'NFC chip') ? 1 : (({{ product.title | json }} === 'Order Photo Frame') ? 0 : 9);
                       if (uploadedUrls.length !== required) return;
 
                       const form = document.querySelector('[data-type="add-to-cart-form"]');
@@ -233,11 +233,11 @@
                       fd.append('id', variantId);
                       fd.append('quantity', '1');
                       uploadedUrls.forEach((u, idx) => {
-                        const isAudio = {{ product.title | json }} === 'NFT chip';
+                        const isAudio = {{ product.title | json }} === 'NFC chip';
                         const prefix = isAudio ? 'Audio' : 'Photo';
                         fd.append(`properties[${prefix} ${idx + 1} URL]`, u);
                       });
-                      const isAudio = {{ product.title | json }} === 'NFT chip';
+                      const isAudio = {{ product.title | json }} === 'NFC chip';
                       const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
                       const uploadDateKey = isAudio ? 'Audio Upload Date' : 'Photo Upload Date';
                       fd.append(`properties[${summaryKey}]`, uploadedUrls.join(', '));
@@ -254,7 +254,7 @@
               </script>
               {%- liquid
                 assign required_photos = 9
-                if product.title == 'NFT chip'
+                if product.title == 'NFC chip'
                   assign required_photos = 1
                 elsif product.title == 'Order Photo Frame'
                   assign required_photos = 0
@@ -265,19 +265,19 @@
               </script>
               <uc-config
                 ctx-name="modal-photo-uploader"
-                {%- if product.title == 'NFT chip' -%}
+                {%- if product.title == 'NFC chip' -%}
                   source-list="local, facebook, gdrive, dropbox, instagram"
                 {%- else -%}
                   source-list="local, camera, facebook, gdrive, dropbox, instagram"
                 {%- endif -%}
-                {%- unless product.title == 'NFT chip' -%}
+                {%- unless product.title == 'NFC chip' -%}
                 files-view-mode="grid"
                 {%- endunless -%}
-                pubkey="c42b2d4efe346e09fc68"
+                pubkey="58cee809ad175004e39b"
                 multiple="true"
                 multiple-max="{{ required_photos | at_least: 1 }}"
                 multiple-min="{{ required_photos | at_least: 1 }}"
-                {%- unless product.title == 'NFT chip' -%}
+                {%- unless product.title == 'NFC chip' -%}
                 img-only="true"
                 {%- endunless -%}
                 crop-preset="1:1"
@@ -307,18 +307,18 @@
           
           <div class="preview-grid" id="preview-grid">
             {%- if product.title == '9 Little Memory Photo Magnets' -%}
-              {%- assign nft_chip = all_products['nft-chip'] -%}
+              {%- assign nfc_chip = all_products['nfc-chip'] -%}
               {%- assign order_photo_frame = all_products['order-photo-frame'] -%}
 
-              {%- if nft_chip -%}
+              {%- if nfc_chip -%}
                 <div class="upsell-card">
-                  <a href="{{ nft_chip.url }}" class="upsell-image-link">
-                    <img src="{{ nft_chip.featured_image | image_url: width: 300 }}" alt="{{ nft_chip.title | escape }}" loading="lazy" width="300" height="300">
+                  <a href="{{ nfc_chip.url }}" class="upsell-image-link">
+                    <img src="{{ nfc_chip.featured_image | image_url: width: 300 }}" alt="{{ nfc_chip.title | escape }}" loading="lazy" width="300" height="300">
                   </a>
                   <div class="upsell-info">
-                    <div class="upsell-title">{{ nft_chip.title }}</div>
-                    <div class="upsell-description">{{ nft_chip.description }}</div>
-                    <a class="upsell-button" href="{{ nft_chip.url }}">Try it</a>
+                    <div class="upsell-title">{{ nfc_chip.title }}</div>
+                    <div class="upsell-description">{{ nfc_chip.description }}</div>
+                    <a class="upsell-button" href="{{ nfc_chip.url }}">Try it</a>
                   </div>
                 </div>
               {%- endif -%}

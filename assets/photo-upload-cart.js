@@ -57,9 +57,9 @@ class PhotoUploadCart {
     photoUrls.forEach((photo, index) => {
       const input = document.createElement('input');
       input.type = 'hidden';
-      // Check if this is for NFT chip (audio) or other products (photos)
-      const isAudio = window.location.pathname.includes('nft-chip') || 
-                     document.querySelector('h1')?.textContent?.includes('NFT chip');
+      // Check if this is for NFC chip (audio) or other products (photos)
+      const isAudio = window.location.pathname.includes('nfc-chip') || 
+                     document.querySelector('h1')?.textContent?.includes('NFC chip');
       const prefix = isAudio ? 'Audio' : 'Photo';
       input.name = `properties[${prefix} ${index + 1} URL]`;
       input.value = photo.url;
@@ -69,8 +69,8 @@ class PhotoUploadCart {
     // Add summary input
     const summaryInput = document.createElement('input');
     summaryInput.type = 'hidden';
-    const isAudio = window.location.pathname.includes('nft-chip') || 
-                   document.querySelector('h1')?.textContent?.includes('NFT chip');
+    const isAudio = window.location.pathname.includes('nfc-chip') || 
+                   document.querySelector('h1')?.textContent?.includes('NFC chip');
     const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
     const uploadDateKey = isAudio ? 'Audio Upload Date' : 'Photo Upload Date';
     summaryInput.name = `properties[${summaryKey}]`;

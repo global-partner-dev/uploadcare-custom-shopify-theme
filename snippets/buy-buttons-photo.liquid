@@ -67,7 +67,7 @@
 
         {%- liquid
           assign required_photos = 9
-          if product.title == 'NFT chip'
+          if product.title == 'NFC chip'
             assign required_photos = 1
           elsif product.title == 'Order Photo Frame'
             assign required_photos = 0
@@ -94,7 +94,7 @@
               {%- if required_photos == 0 -%}
                 Add to Cart
               {%- elsif required_photos == 1 -%}
-                {%- if product.title == 'NFT chip' -%}
+                {%- if product.title == 'NFC chip' -%}
                   Upload 1 audio to add to cart
                 {%- else -%}
                   Upload 1 photo to add to cart
@@ -169,7 +169,7 @@
       // Set per product title
       this.maxPhotos = (function() {
         const title = {{ product.title | json }};
-        if (title === 'NFT chip') return 1;
+        if (title === 'NFC chip') return 1;
         if (title === 'Order Photo Frame') return 0;
         return 9;
       })();
@@ -213,7 +213,7 @@
           addToCartBtn.classList.remove('btn--disabled');
         } else {
           addToCartBtn.disabled = true;
-          {%- if product.title == 'NFT chip' -%}
+          {%- if product.title == 'NFC chip' -%}
             addToCartBtn.textContent = `Upload 1 audio`;
           {%- else -%}
             addToCartBtn.textContent = `Upload ${this.maxPhotos - this.uploadedPhotos.length} more photos`;
@@ -233,7 +233,7 @@
         this.uploadedPhotos.forEach((photo, index) => {
           const input = document.createElement('input');
           input.type = 'hidden';
-          const isAudio = {{ product.title | json }} === 'NFT chip';
+          const isAudio = {{ product.title | json }} === 'NFC chip';
           const prefix = isAudio ? 'Audio' : 'Photo';
           input.name = `properties[${prefix} ${index + 1} URL]`;
           input.value = photo.url;
@@ -243,7 +243,7 @@
         // Add a summary input with all URLs
         const summaryInput = document.createElement('input');
         summaryInput.type = 'hidden';
-        const isAudio = {{ product.title | json }} === 'NFT chip';
+        const isAudio = {{ product.title | json }} === 'NFC chip';
         const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
         summaryInput.name = `properties[${summaryKey}]`;
         summaryInput.value = this.uploadedPhotos.map(photo => photo.url).join(', ');
