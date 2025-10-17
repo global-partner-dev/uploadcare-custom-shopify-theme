@@ -171,9 +171,7 @@
   border-radius: 8px;
   overflow: hidden;
   background: #fafafa;
-}
-
-/* When 9 images are uploaded, show an inset dashed border inside each image */
+}/* When 9 images are uploaded, show an inset dashed border inside each image */
 .drop-grid.complete .cell::before {
   content: '';
   position: absolute;
@@ -183,7 +181,7 @@
   box-shadow: inset 0 0 0 8px rgba(0,0,0,0.15); /* darker ring outside dashed */
   z-index: 1;
 }
-
+/* When 9 images are uploaded, show an inset dashed border inside each image */
 .drop-grid.complete .cell::after {
   content: '';
   position: absolute;
@@ -192,9 +190,7 @@
   border-radius: 6px;
   pointer-events: none; /* do not block clicks */
   box-shadow: 0 0 0 1px rgba(0,0,0,0.15) inset; /* subtle contrast on bright photos */
-  z-index: 2;
 }
-
 .drop-grid .cell img {
   position: absolute;
   inset: 0;
