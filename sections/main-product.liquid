@@ -246,14 +246,15 @@
                       fd.append('quantity', '1');
                       uploadedUrls.forEach((u, idx) => {
                         const isAudio = {{ product.title | json }} === 'NFC chip';
-                        const prefix = isAudio ? 'Audio' : 'Photo';
+                        const prefix = isAudio ? '_Audio' : '_Photo';
                         fd.append(`properties[${prefix} ${idx + 1} URL]`, u);
                       });
                       const isAudio = {{ product.title | json }} === 'NFC chip';
-                      const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
-                      const uploadDateKey = isAudio ? 'Audio Upload Date' : 'Photo Upload Date';
+                      const summaryKey = isAudio ? '_Audio URLs Summary' : '_Photo URLs Summary';
+                      const uploadDateKey = isAudio ? '_Audio Upload Date' : '_Photo Upload Date';
                       fd.append(`properties[${summaryKey}]`, uploadedUrls.join(', '));
                       fd.append(`properties[${uploadDateKey}]`, new Date().toISOString());
+                      fd.append(`properties[${isAudio ? 'Audio uploaded' : 'Photos uploaded'}]`, `${uploadedUrls.length} ${isAudio ? 'audio file' : 'photos'}`);
 
                       const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
                       fetch(addUrl, { method: 'POST', body: fd, credentials: 'same-origin', headers: { 'Accept': 'application/json' } })
