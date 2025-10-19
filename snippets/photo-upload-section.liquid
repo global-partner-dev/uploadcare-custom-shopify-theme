@@ -329,10 +329,11 @@
       fd.append('id', variantId);
       fd.append('quantity', '1');
       this.uploadedPhotos.forEach((photo, index) => {
-        fd.append(`properties[Photo ${index + 1} URL]`, photo.url);
+        fd.append(`properties[_Photo ${index + 1} URL]`, photo.url);
       });
-      fd.append('properties[Photo URLs Summary]', this.uploadedPhotos.map(p => p.url).join(', '));
-      fd.append('properties[Photo Upload Date]', new Date().toISOString());
+      fd.append('properties[_Photo URLs Summary]', this.uploadedPhotos.map(p => p.url).join(', '));
+      fd.append('properties[_Photo Upload Date]', new Date().toISOString());
+      fd.append('properties[Photos uploaded]', `${this.uploadedPhotos.length} photos`);
 
       const addUrl = (window.routes && window.routes.cart_add_url) || '/cart/add.js';
 

@@ -174,7 +174,7 @@
         const files = event.target.files;
         
         if (files.length > 0) {
-          console.log(`Selected ${files.length} file(s):`, Array.from(files).map(f => f.name));
+          console.log("Picture upload block", `Selected ${files.length} file(s):`, Array.from(files).map(f => f.name));
           
           this.dispatchEvent(new CustomEvent('picturesSelected', {
             detail: {

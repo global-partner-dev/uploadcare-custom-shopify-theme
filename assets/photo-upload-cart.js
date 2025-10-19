@@ -49,40 +49,48 @@ class PhotoUploadCart {
   }
 
   addPhotoUrlsToForm(form, photoUrls) {
-    // Remove existing photo URL inputs
-    const existingInputs = form.querySelectorAll('input[name^="properties[Photo"], input[name^="properties[Audio"]');
+    // Remove existing photo URL inputs (both old and new formats)
+    const existingInputs = form.querySelectorAll('input[name^="properties[Photo"], input[name^="properties[Audio"], input[name^="properties[_Photo"], input[name^="properties[_Audio"]');
     existingInputs.forEach(input => input.remove());
 
-    // Add new photo URL inputs
+    // Add new photo URL inputs with underscore prefix to hide from checkout
     photoUrls.forEach((photo, index) => {
       const input = document.createElement('input');
       input.type = 'hidden';
       // Check if this is for NFC chip (audio) or other products (photos)
       const isAudio = window.location.pathname.includes('nfc-chip') || 
                      document.querySelector('h1')?.textContent?.includes('NFC chip');
-      const prefix = isAudio ? 'Audio' : 'Photo';
+      const prefix = isAudio ? '_Audio' : '_Photo';
       input.name = `properties[${prefix} ${index + 1} URL]`;
       input.value = photo.url;
       form.appendChild(input);
     });
 
-    // Add summary input
+    // Add summary input with underscore prefix
     const summaryInput = document.createElement('input');
     summaryInput.type = 'hidden';
     const isAudio = window.location.pathname.includes('nfc-chip') || 
                    document.querySelector('h1')?.textContent?.includes('NFC chip');
-    const summaryKey = isAudio ? 'Audio URLs Summary' : 'Photo URLs Summary';
-    const uploadDateKey = isAudio ? 'Audio Upload Date' : 'Photo Upload Date';
+    const summaryKey = isAudio ? '_Audio URLs Summary' : '_Photo URLs Summary';
+    const uploadDateKey = isAudio ? '_Audio Upload Date' : '_Photo Upload Date';
     summaryInput.name = `properties[${summaryKey}]`;
     summaryInput.value = photoUrls.map(photo => photo.url).join(', ');
     form.appendChild(summaryInput);
 
-    // Add metadata
+    // Add metadata with underscore prefix
     const metadataInput = document.createElement('input');
     metadataInput.type = 'hidden';
     metadataInput.name = `properties[${uploadDateKey}]`;
     metadataInput.value = new Date().toISOString();
     form.appendChild(metadataInput);
+
+    // Add friendly display property (visible to customer)
+    const displayInput = document.createElement('input');
+    displayInput.type = 'hidden';
+    const displayKey = isAudio ? 'Audio uploaded' : 'Photos uploaded';
+    displayInput.name = `properties[${displayKey}]`;
+    displayInput.value = `${photoUrls.length} ${isAudio ? 'audio file' : 'photos'}`;
+    form.appendChild(displayInput);
   }
 
   handleCartUpdate(e) {
