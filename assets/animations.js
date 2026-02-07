@@ -3,7 +3,7 @@ const SCROLL_ANIMATION_OFFSCREEN_CLASSNAME = 'scroll-trigger--offscreen';
 const SCROLL_ZOOM_IN_TRIGGER_CLASSNAME = 'animate--zoom-in';
 const SCROLL_ANIMATION_CANCEL_CLASSNAME = 'scroll-trigger--cancel';
 
-// Scroll in animation logic
+// Scroll in animation logic, this is important
 function onIntersection(elements, observer) {
   elements.forEach((element, index) => {
     if (element.isIntersecting) {
